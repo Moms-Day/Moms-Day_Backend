@@ -3,19 +3,18 @@ import os
 
 
 class Config:
-    SERVICE_NAME = 'Flask_Large_Application_Example'
+    SERVICE_NAME = "Mom's day"
     SERVICE_NAME_UPPER = SERVICE_NAME.upper()
-    REPRESENTATIVE_HOST = None
+    DOMAIN = None
 
     RUN_SETTING = {
         'threaded': True
     }
 
-    SECRET_KEY = os.getenv('SECRET_KEY', '85c145a16bd6f6e1f3e104ca78c6a102')
-    # Secret key for any 3-rd party libraries
+    SECRET_KEY = os.getenv('SECRET_KEY', '0la2kd03jfk1kk3fj3ivn3002m2me421')
 
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=30)
-    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=365)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=12)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     JWT_HEADER_TYPE = 'JWT'
 
     MONGODB_SETTINGS = {
@@ -26,21 +25,6 @@ class Config:
         'db': SERVICE_NAME
     }
 
-    REDIS_SETTINGS = {
-        'host': 'localhost',
-        'port': 6379,
-        'password': os.getenv('REDIS_PW_{}'.format(SERVICE_NAME_UPPER)),
-        'db': 0
-    }
-
-    INFLUXDB_SETTINGS = {
-        'host': 'localhost',
-        'port': 8086,
-        'username': 'root',
-        'password': os.getenv('INFLUX_PW_{}'.format(SERVICE_NAME_UPPER), 'root'),
-        'database': SERVICE_NAME.replace('-', '_')
-    }
-
     SWAGGER = {
         'title': SERVICE_NAME,
         'specs_route': os.getenv('SWAGGER_URI', '/docs'),
@@ -49,7 +33,7 @@ class Config:
         'info': {
             'title': SERVICE_NAME + ' API',
             'version': '1.0',
-            'description': ''
+            'description': 'CareWorker App + Daughter App'
         },
         'basePath': '/ '
     }
@@ -63,5 +47,19 @@ class Config:
                 'name': 'Some Tag',
                 'description': 'Some API'
             },
+
+            # CareWorker ----------
+            {
+                'name': '[CareWorker] 계정',
+                'description': '요양보호사 계정 관련 API'
+            },
+            # ---------------------
+
+            # Daughter ----------
+            {
+                'name': '[Daughter] 계정',
+                'description': '자녀 계정 관련 API'
+            }
+            # ---------------------
         ]
     }

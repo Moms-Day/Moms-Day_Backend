@@ -4,10 +4,9 @@ import time
 
 import ujson
 
-from flask import Response, abort, after_this_request, g, jsonify, request
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import Response, abort, after_this_request, request
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource
-from werkzeug.exceptions import HTTPException
 
 
 def after_request(response):
@@ -18,24 +17,6 @@ def after_request(response):
     response.headers['X-Frame-Options'] = 'deny'
 
     return response
-
-
-def exception_handler(e):
-    print(e)
-
-    if isinstance(e, HTTPException):
-        description = e.description
-        code = e.code
-    elif isinstance(e, BaseResource.ValidationError):
-        description = e.description
-        code = 400
-    else:
-        description = ''
-        code = 500
-
-    return jsonify({
-        'msg': description
-    }), code
 
 
 def gzipped(fn):
@@ -82,18 +63,9 @@ def auth_required(model):
 
 
 def json_required(required_keys):
-    """
-    View decorator for JSON validation.
-
-    - If content-type is not application/json : returns status code 406
-    - If required_keys are not exist on request.json : returns status code 400
-
-    Args:
-        required_keys (dict): Required keys on requested JSON payload
-    """
     def decorator(fn):
         if fn.__name__ == 'get':
-            print('[WARN] JSON with GET method? on "{}()"'.format(fn.__qualname__))
+            print('[WARNING] JSON with GET method? on "{}()"'.format(fn.__qualname__))
 
         @wraps(fn)
         def wrapper(*args, **kwargs):
@@ -112,9 +84,6 @@ def json_required(required_keys):
 
 
 class BaseResource(Resource):
-    """
-    BaseResource with some helper functions based flask_restful.Resource
-    """
     def __init__(self):
         self.now = time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -142,19 +111,12 @@ class BaseResource(Resource):
 
 
 class Router:
-    """
-    REST resource routing helper class like standard flask 3-rd party libraries
-    """
     def __init__(self, app=None):
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app):
-        """
-        Routes resources. Use app.register_blueprint() aggressively
-        """
         app.after_request(after_request)
-        app.register_error_handler(Exception, exception_handler)
 
         from app.views import sample
         app.register_blueprint(sample.api.blueprint)
