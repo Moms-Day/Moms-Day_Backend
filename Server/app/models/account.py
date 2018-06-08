@@ -33,7 +33,8 @@ class AccountBase(Document):
     }
 
     id = StringField(
-        primary_key=True
+        primary_key=True,
+        max_length=20
     )
 
     pw = StringField(
@@ -41,11 +42,12 @@ class AccountBase(Document):
     )
 
     name = StringField(
-        required=True
+        required=True,
+        max_length=20
     )
 
     signup_time = DateTimeField(
-        default=datetime.now()
+        default=datetime.now
     )
 
     phone_number = StringField(
@@ -78,7 +80,8 @@ class CareWorkerModel(AccountBase):
     )
 
     bio = StringField(
-        required=True
+        required=True,
+        max_length=300
     )
 
 
