@@ -3,9 +3,9 @@ from datetime import datetime
 from mongoengine import *
 
 
-class SignupWaitingModel(Document):
+class BeforeCertifyModel(Document):
     meta = {
-        'collection': 'signup_waiting_model'
+        'collection': 'before_certify'
     }
 
     phone_number = StringField(
@@ -52,14 +52,17 @@ class AccountBase(Document):
         required=True
     )
 
-    certify_number = StringField(
+    certify_code = StringField(
         required=True
     )
 
 
 class CareWorkerModel(AccountBase):
+    """
+    CareWorker 의 계정 collection
+    """
     meta = {
-        'collection': 'care_worker_model'
+        'collection': 'care_worker_account'
     }
 
     career = IntField(
@@ -80,4 +83,14 @@ class CareWorkerModel(AccountBase):
 
 
 class DaughterModel(AccountBase):
-    pass
+    """
+    Daughter 의 계정 collection
+    """
+
+    meta = {
+        'collection': 'daughter_account'
+    }
+
+    age = IntField(
+        required=True
+    )
