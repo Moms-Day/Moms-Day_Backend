@@ -1,5 +1,5 @@
 # from flasgger import swag_from
-from flask import Blueprint, request
+from flask import Blueprint, request, Response
 from flask_restful import Api
 
 # from app.docs.sample import *
@@ -21,3 +21,9 @@ class Sample(BaseResource):
             raise self.ValidationError('Age is 0!')
 
         return self.unicode_safe_json_dumps(payload, 201)
+
+
+@api.resource('/index')
+class Index(BaseResource):
+    def get(self):
+        return Response('success', 200)
