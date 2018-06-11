@@ -3,25 +3,6 @@ from datetime import datetime
 from mongoengine import *
 
 
-class BeforeCertifyModel(Document):
-    meta = {
-        'collection': 'before_certify'
-    }
-
-    phone_number = StringField(
-        required=True
-    )
-
-    certify_number = StringField(
-        primary_key=True
-    )
-
-    # CareWork : True, Daughter : False
-    app_type = BooleanField(
-
-    )
-
-
 class AccountBase(Document):
     """
     CareWorker 계정과 Daughter 계정의 상위 collection
@@ -55,7 +36,7 @@ class AccountBase(Document):
     )
 
     certify_code = StringField(
-        required=True
+        # required=True
     )
 
 
@@ -78,6 +59,10 @@ class CareWorkerModel(AccountBase):
     facility_code = StringField(
         required=True
     )
+
+    # profile_image = ImageField(
+    #
+    # )
 
     bio = StringField(
         required=True,
