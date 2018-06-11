@@ -119,4 +119,7 @@ class Router:
         app.after_request(after_request)
 
         from app.views import sample
+        from app.views.careworker import signup
+
         app.register_blueprint(sample.api.blueprint)
+        app.register_blueprint(signup.api.blueprint)
