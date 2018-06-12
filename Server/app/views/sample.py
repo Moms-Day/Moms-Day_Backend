@@ -27,3 +27,12 @@ class Sample(BaseResource):
 class Index(BaseResource):
     def get(self):
         return Response('success', 200)
+
+    def post(self):
+        a = request.json['a']
+        b = request.json['b']
+
+        return {
+            'first': a,
+            'second': b
+        }, 200
