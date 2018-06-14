@@ -41,8 +41,6 @@ class Signup(BaseResource):
             'bio': request.json['bio']
         }
 
-        # profile_image = request.files['image']
-
         if CareWorkerModel.objects(id=id).first():
             return {
                 'msg': 'id duplicated'

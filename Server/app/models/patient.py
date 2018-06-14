@@ -10,6 +10,11 @@ class Patient(Document):
 
     )
 
+    # male == True , female == False
+    gender = BooleanField(
+
+    )
+
     memo = StringField(
         max_length=500
     )
