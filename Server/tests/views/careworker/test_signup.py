@@ -30,3 +30,11 @@ def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_care_worker
 
     # Check message
     assert resp.json['msg'] == 'id duplicated'
+
+
+def incorrect_facility_code():
+    pass
+
+
+def incorrect_certify_code():
+    pass

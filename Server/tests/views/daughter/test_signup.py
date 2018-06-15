@@ -7,8 +7,7 @@ def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
     # status code 201
     assert resp.status_code == 201
 
-    # Check that if data inserted the database
-    # assert CareWorkerModel.objects(id=info_test_care_worker['id']).first() is not None
+    # DaughterModel 에 잘 들어 갔는지 확인 (DaughterModel 의 Document 에서 추가한 PatientModel 의 Document 를 참조하는지도)
 
 
 def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_daughter):
@@ -21,3 +20,13 @@ def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_daughter):
         '/daughter/signup',
         json=info_test_daughter
     )
+
+    # status code 409
+    assert resp.status_code == 409
+
+    # Check message
+    assert resp.json['msg'] == 'id duplicated'
+
+
+def incorrect_certify_code():
+    pass
