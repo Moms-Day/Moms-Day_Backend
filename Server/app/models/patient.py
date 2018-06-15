@@ -1,7 +1,7 @@
 from mongoengine import *
 
 
-class Patient(Document):
+class PatientModel(Document):
     name = StringField(
         max_length=20
     )
@@ -10,7 +10,7 @@ class Patient(Document):
 
     )
 
-    # male == True , female == False
+    # male => True , female => False
     gender = BooleanField(
 
     )
@@ -19,13 +19,39 @@ class Patient(Document):
         max_length=500
     )
 
-    daughter = ReferenceField(
-        document_type='DaughterModel'
+    daughter = ListField(
+        ReferenceField(
+            document_type='DaughterModel', required=True
+        )
     )
 
-    care_workers = ListField(
+    care_workers = ReferenceField(
+        document_type='CareWorkerModel'
+    )
+
+    # ----------------------------------
+
+    meal_menus = ListField(
         ReferenceField(
-            document_type='CareWorkerModel'
+            document_type='MealMenu'
+        )
+    )
+
+    schedules = ListField(
+        ReferenceField(
+            document_type='Schedule'
+        )
+    )
+
+    physical_conditions = ListField(
+        ReferenceField(
+            document_type='PhysicalCondition'
+        )
+    )
+
+    photos = ListField(
+        ReferenceField(
+            document_type='RepresentativePhoto'
         )
     )
 
@@ -34,22 +60,28 @@ class MealMenu(Document):
     """
     오늘의 식단(조식, 중식, 석식) 및 추가 간식
     """
-    breakfast = ListField(StringField(
 
+    date = DateTimeField(
+        required=True
+    )
+
+    breakfast = ListField(StringField(
+        required=True
     ))
 
     lunch = ListField(StringField(
-
+        required=True
     ))
 
     dinner = ListField(StringField(
-
+        required=True
     ))
 
     snack = StringField(max_length=30)
 
     patient = ReferenceField(
-        document_type='Patient'
+        document_type='Patient',
+        reverse_delete_rule=CASCADE
     )
 
 
@@ -57,16 +89,21 @@ class Schedule(Document):
     """
     하루 일정표
     """
+    date = DateTimeField(
+        required=True
+    )
+
     time_column = ListField(
-        DateTimeField()
+        DateTimeField(required=True)
     )
 
     work = ListField(
-        StringField(max_length=100)
+        StringField(max_length=100, required=True)
     )
 
     patient = ReferenceField(
-        document_type='Patient'
+        document_type='Patient',
+        reverse_delete_rule=CASCADE
     )
 
 
@@ -74,27 +111,32 @@ class PhysicalCondition(Document):
     """
     하루 건강 상태
     """
-    activity_reduction = BooleanField(default=False, required=True)
-    low_temperature = BooleanField(default=False, required=True)
-    high_fever = BooleanField(default=False, required=True)
-    blood_pressure_increase = BooleanField(default=False, required=True)
-    blood_pressure_reduction = BooleanField(default=False, required=True)
-    lack_of_sleep = BooleanField(default=False, required=True)
-    lose_Appetite = BooleanField(default=False, required=True)
-    binge_eating = BooleanField(default=False, required=True)
-    diarrhea = BooleanField(default=False, required=True)
-    constipation = BooleanField(default=False, required=True)
-    vomiting = BooleanField(default=False, required=True)
-    urination_inconvenient = BooleanField(default=False, required=True)
-    human_power_reduction = BooleanField(default=False, required=True)
-    poverty_of_blood = BooleanField(default=False, required=True)
-    cough = BooleanField(default=False, required=True)
-    bool_of_cough = BooleanField(default=False, required=True)
+    date = DateTimeField(
+        required=True
+    )
+
+    activity_reduction = BooleanField(default=False)
+    low_temperature = BooleanField(default=False)
+    high_fever = BooleanField(default=False)
+    blood_pressure_increase = BooleanField(default=False)
+    blood_pressure_reduction = BooleanField(default=False)
+    lack_of_sleep = BooleanField(default=False)
+    lose_Appetite = BooleanField(default=False)
+    binge_eating = BooleanField(default=False)
+    diarrhea = BooleanField(default=False)
+    constipation = BooleanField(default=False)
+    vomiting = BooleanField(default=False)
+    urination_inconvenient = BooleanField(default=False)
+    human_power_reduction = BooleanField(default=False)
+    poverty_of_blood = BooleanField(default=False)
+    cough = BooleanField(default=False)
+    bool_of_cough = BooleanField(default=False)
 
     comment = StringField(max_length=300)
 
     patient = ReferenceField(
-        document_type='Patient'
+        document_type='Patient',
+        reverse_delete_rule=CASCADE
     )
 
 
@@ -102,10 +144,15 @@ class RepresentativePhoto(Document):
     """
     하루를 대표하는 사진
     """
-    photo = ImageField()
+    date = DateTimeField(
+
+    )
+
+    # photo = ImageField()
 
     comment = StringField(max_length=200)
 
     patient = ReferenceField(
-        document_type='Patient'
+        document_type='Patient',
+        reverse_delete_rule=CASCADE
     )

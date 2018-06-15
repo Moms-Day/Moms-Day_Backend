@@ -69,6 +69,10 @@ class CareWorkerModel(AccountBase):
         max_length=300
     )
 
+    patients = ListField(
+        ReferenceField(document_type='PatientModel')
+    )
+
 
 class DaughterModel(AccountBase):
     """
@@ -81,4 +85,8 @@ class DaughterModel(AccountBase):
 
     age = IntField(
         required=True
+    )
+
+    parents = ListField(
+        ReferenceField(document_type='PatientModel')
     )
