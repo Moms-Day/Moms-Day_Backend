@@ -90,3 +90,12 @@ class DaughterModel(AccountBase):
     parents = ListField(
         ReferenceField(document_type='PatientModel')
     )
+
+
+class CertifyCodesModel(Document):
+    certify_code = StringField(required=True)
+
+
+class FacilityCodesModel(Document):
+    name = StringField(required=True)
+    facility_code = StringField(required=True)

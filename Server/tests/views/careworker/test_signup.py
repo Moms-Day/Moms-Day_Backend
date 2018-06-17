@@ -28,9 +28,6 @@ def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_care_worker
     # status code 409
     assert resp.status_code == 409
 
-    # Check message
-    assert resp.json['msg'] == 'id duplicated'
-
 
 def incorrect_facility_code():
     pass

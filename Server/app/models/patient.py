@@ -3,57 +3,31 @@ from mongoengine import *
 
 class PatientModel(Document):
     name = StringField(
-        max_length=20
+        max_length=20, required=True
     )
 
     age = IntField(
-
+        required=True
     )
 
     # male => True , female => False
     gender = BooleanField(
-
+        required=True
     )
 
     memo = StringField(
         max_length=500
     )
 
-    daughter = ListField(
-        ReferenceField(
-            document_type='DaughterModel', required=True
-        )
-    )
-
-    care_workers = ReferenceField(
-        document_type='CareWorkerModel'
-    )
-
-    # ----------------------------------
-
-    meal_menus = ListField(
-        ReferenceField(
-            document_type='MealMenu'
-        )
-    )
-
-    schedules = ListField(
-        ReferenceField(
-            document_type='Schedule'
-        )
-    )
-
-    physical_conditions = ListField(
-        ReferenceField(
-            document_type='PhysicalCondition'
-        )
-    )
-
-    photos = ListField(
-        ReferenceField(
-            document_type='RepresentativePhoto'
-        )
-    )
+    # daughter = ListField(
+    #     ReferenceField(
+    #         document_type='DaughterModel', required=True
+    #     )
+    # )
+    #
+    # care_workers = ReferenceField(
+    #     document_type='CareWorkerModel'
+    # )
 
 
 class MealMenu(Document):

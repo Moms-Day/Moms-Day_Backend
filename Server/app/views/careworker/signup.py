@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response
+from flask import Blueprint, request, Response, abort
 from flask_restful import Api
 from werkzeug.security import generate_password_hash
 from flasgger import swag_from
@@ -14,7 +14,7 @@ api.prefix = '/care'
 
 
 @api.resource('/signup')
-class Signup(BaseResource):
+class CareSignup(BaseResource):
     @swag_from(SIGNUP_POST)
     @json_required({
         'id': str,
@@ -42,9 +42,7 @@ class Signup(BaseResource):
         }
 
         if CareWorkerModel.objects(id=id).first():
-            return {
-                'msg': 'id duplicated'
-            }, 409
+            abort(409)
 
         CareWorkerModel(**new_user).save()
 
