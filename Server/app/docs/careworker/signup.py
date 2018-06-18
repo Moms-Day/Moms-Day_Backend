@@ -1,4 +1,4 @@
-SIGNUP_POST = {
+CARE_SIGNUP_POST = {
     'tags': ['[CareWorker] 계정'],
     'description': '요양보호사 회원 가입 (아직 SMS 인증이 구현되지 않음)',
     'parameters': [
@@ -49,14 +49,14 @@ SIGNUP_POST = {
             'description': 'SMS 인증으로 받은 인증번호',
             'in': 'json',
             'type': 'str',
-            'required': True
+            'required': False
         },
         {
             'name': 'facilityCode',
             'description': '소속 병원(요양시설) 코드',
             'in': 'json',
             'type': 'str',
-            'required': True
+            'required': False
         },
         {
             'name': 'bio',
@@ -71,12 +71,7 @@ SIGNUP_POST = {
             'description': '회원가입 성공'
         },
         '409': {
-            'description': 'id 중복',
-            'example': {
-                'application/json': {
-                    'msg': 'id duplicated'
-                }
-            }
+            'description': 'id 중복'
         }
     }
 }

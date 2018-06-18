@@ -7,7 +7,7 @@ from app.views import BaseResource, json_required
 
 from app.models.account import CareWorkerModel
 
-from app.docs.careworker.signup import SIGNUP_POST
+from app.docs.careworker.signup import CARE_SIGNUP_POST
 
 api = Api(Blueprint(__name__, __name__))
 api.prefix = '/care'
@@ -15,7 +15,7 @@ api.prefix = '/care'
 
 @api.resource('/signup')
 class CareSignup(BaseResource):
-    @swag_from(SIGNUP_POST)
+    @swag_from(CARE_SIGNUP_POST)
     @json_required({
         'id': str,
         'pw': str,
@@ -23,8 +23,6 @@ class CareSignup(BaseResource):
         'career': int,
         'patientInCharge': int,
         'phoneNumber': str,
-        'certifyCode': str,
-        'facilityCode': str,
         'bio': str
     })
     def post(self):

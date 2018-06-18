@@ -57,7 +57,7 @@ class CareWorkerModel(AccountBase):
     )
 
     facility_code = StringField(
-        required=True
+        # required=True
     )
 
     # profile_image = ImageField(

@@ -77,6 +77,13 @@ def json_required(required_keys):
                     abort(400)
                 if typ is str and not request.json[key]:
                     abort(400)
+                if typ is list and not request.json[key]:
+                    abort(400)
+                if typ is dict and not request.json[key]:
+                    abort(400)
+                # if typ is tuple and not request.json[key]:
+                #     if (typ[0] is not list) or (typ[1] is not dict):
+                #         abort(400)
 
             return fn(*args, **kwargs)
         return wrapper
