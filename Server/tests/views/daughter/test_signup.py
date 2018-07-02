@@ -1,3 +1,9 @@
+from werkzeug.security import check_password_hash
+
+from app.models.account import DaughterModel
+from app.models.patient import PatientModel
+
+
 def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
     resp = flask_client.post(
         '/daughter/signup',
@@ -7,7 +13,16 @@ def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
     # status code 201
     assert resp.status_code == 201
 
-    # DaughterModel 에 잘 들어 갔는지 확인 (DaughterModel 의 Document 에서 추가한 PatientModel 의 Document 를 참조하는지도)
+    # Check that if data inserted the database
+    new_user = DaughterModel.objects(id=info_test_daughter['id']).first()
+    assert new_user is not None
+
+    assert new_user.id == info_test_daughter['id']
+    assert check_password_hash(new_user.pw, info_test_daughter['pw'])
+    assert new_user.phone_number == info_test_daughter['phoneNumber']
+    assert new_user.certify_code == info_test_daughter['certifyCode']
+    assert new_user.name == info_test_daughter['name']
+    assert new_user.age == info_test_daughter['age']
 
 
 def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_daughter):
@@ -23,9 +38,6 @@ def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_daughter):
 
     # status code 409
     assert resp.status_code == 409
-
-    # Check message
-    assert resp.json['msg'] == 'id duplicated'
 
 
 def incorrect_certify_code():
