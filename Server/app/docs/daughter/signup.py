@@ -45,7 +45,7 @@ DAUGHTER_SIGNUP_POST = {
             'required': True
         },
         {
-            'name': 'patients',
+            'name': 'parents',
             'description': '환자(노인) 등록(이름(str), 나이(int), 성별(bool => 남자가 True)',
             'in': 'json',
             'type': 'array',
