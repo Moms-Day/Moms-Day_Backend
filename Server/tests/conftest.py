@@ -79,11 +79,11 @@ def info_test_daughter():
     return {
         "id": "rudtj2316",
         "pw": "zaq123",
-        "phoneNumber": "01033334444",
-        "certifyCode": "fmrkfmk3132",
         "name": "jyj",
         "age": 25,
-        "parents": [
+        "phoneNumber": "01033334444",
+        "certifyCode": "fmrkfmk3132",
+        "patients": [
             {"name": "kdi", "age": 65, "gender": False},
             {"name": "lpp", "age": 72, "gender": True}
         ]
