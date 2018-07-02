@@ -54,7 +54,7 @@ class MealMenu(Document):
     snack = StringField(max_length=30)
 
     patient = ReferenceField(
-        document_type='PatientModel',
+        document_type='Patient',
         reverse_delete_rule=CASCADE
     )
 
@@ -76,7 +76,7 @@ class Schedule(Document):
     )
 
     patient = ReferenceField(
-        document_type='PatientModel',
+        document_type='Patient',
         reverse_delete_rule=CASCADE
     )
 
@@ -109,7 +109,7 @@ class PhysicalCondition(Document):
     comment = StringField(max_length=300)
 
     patient = ReferenceField(
-        document_type='PatientModel',
+        document_type='Patient',
         reverse_delete_rule=CASCADE
     )
 
@@ -127,6 +127,6 @@ class RepresentativePhoto(Document):
     comment = StringField(max_length=200)
 
     patient = ReferenceField(
-        document_type='PatientModel',
+        document_type='Patient',
         reverse_delete_rule=CASCADE
     )

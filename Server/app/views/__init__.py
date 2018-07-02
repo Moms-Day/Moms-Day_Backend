@@ -75,6 +75,15 @@ def json_required(required_keys):
             for key, typ in required_keys.items():
                 if key not in request.json or not type(request.json[key]) is typ:
                     abort(400)
+                if typ is str and not request.json[key]:
+                    abort(400)
+                if typ is list and not request.json[key]:
+                    abort(400)
+                if typ is dict and not request.json[key]:
+                    abort(400)
+                # if typ is tuple and not request.json[key]:
+                #     if (typ[0] is not list) or (typ[1] is not dict):
+                #         abort(400)
 
             return fn(*args, **kwargs)
         return wrapper
@@ -117,10 +126,7 @@ class Router:
         app.after_request(after_request)
 
         from app.views import sample
-        app.register_blueprint(sample.api.blueprint)
-
         from app.views.careworker import signup
-        app.register_blueprint(signup.api.blueprint)
 
-        from app.views.daughter import signup
+        app.register_blueprint(sample.api.blueprint)
         app.register_blueprint(signup.api.blueprint)
