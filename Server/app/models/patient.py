@@ -19,15 +19,13 @@ class PatientModel(Document):
         max_length=500
     )
 
-    # daughter = ListField(
-    #     ReferenceField(
-    #         document_type='DaughterModel', required=True
-    #     )
-    # )
-    #
-    # care_workers = ReferenceField(
-    #     document_type='CareWorkerModel'
-    # )
+    daughter = ReferenceField(
+        document_type='DaughterModel'
+    )
+
+    care_workers = ReferenceField(
+        document_type='CareWorkerModel'
+    )
 
 
 class MealMenu(Document):

@@ -69,9 +69,9 @@ class CareWorkerModel(AccountBase):
         max_length=300
     )
 
-    patients = ListField(
-        ReferenceField(document_type='PatientModel')
-    )
+    # patients = ListField(
+    #     ReferenceField(document_type='PatientModel')
+    # )
 
 
 class DaughterModel(AccountBase):
@@ -87,9 +87,9 @@ class DaughterModel(AccountBase):
         required=True
     )
 
-    parents = ListField(
-        ReferenceField(document_type='PatientModel')
-    )
+    # parents = ListField(
+    #     ReferenceField(document_type='PatientModel')
+    # )
 
 
 class CertifyCodesModel(Document):
