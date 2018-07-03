@@ -40,13 +40,14 @@ class DaughterSignup(BaseResource):
             'age': request.json['age']
         }
 
-        user = DaughterModel(**new_user)
+        d = DaughterModel(**new_user).save()
 
         for parent in request.json['parents']:
-            user.parents.append(
-                PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender']).save()
-            )
+            PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender'], daughter=d).save()
 
-        user.save()
+        # for parent in request.json['parents']:
+        #     user.parents.append(
+        #         PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender']).save()
+        #     )
 
         return Response('', 201)
