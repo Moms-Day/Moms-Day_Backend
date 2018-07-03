@@ -4,6 +4,7 @@ from app.models.account import CareWorkerModel
 
 
 def test_signup_success(flask_client, mongodb_set_for_test, info_test_care_worker):
+    # mongodb_set_for_test.drop_database("Mom's_day")
     resp = flask_client.post(
         '/care/signup',
         json=info_test_care_worker
