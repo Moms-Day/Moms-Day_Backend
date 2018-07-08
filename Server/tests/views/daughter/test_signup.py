@@ -5,6 +5,7 @@ from app.models.patient import PatientModel
 
 
 def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
+    # mongodb_set_for_test.drop_database("Mom's_day")
     resp = flask_client.post(
         '/daughter/signup',
         json=info_test_daughter
