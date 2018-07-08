@@ -1,8 +1,8 @@
 from app.docs import SAMPLE_ACCESS_TOKEN, SAMPLE_REFRESH_TOKEN
 
-CARE_AUTH_POST = {
-    'tags': ['[CareWorker] 계정'],
-    'description': '요양보호사 로그인',
+DAUGHTER_AUTH_POST = {
+    'tags': ['[Daughter] 계정'],
+    'description': '자녀 로그인',
     'parameters': [
         {
             'name': 'id',
