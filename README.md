@@ -19,7 +19,7 @@
 ### API Architecture
     - REST API
 ### API Documentation
-    - APIDOC
+    - Swagger
 ### Continuous Integration Tool
     - Travis CI
 ### Cloud Computing
@@ -30,12 +30,8 @@
     - AWS Route53
 ### CDN server
     - AWS Cloud Front
-### Software Development Process
-    - TDD
-        - pytest
-        - nose
-        - Coveralls
+### Test
+    - pytest
+    - Coveralls
 ### What To Consider
-    - docker
-    - Grafana(reqeust monitoring)
-    - message queue
+    - Auto Deploy(docker compose)
