@@ -69,6 +69,16 @@ class CareWorkerModel(AccountBase):
         max_length=300
     )
 
+    # 평가 정보
+    evaluation_diligence = LongField()
+    evaluation_kindness = LongField()
+    overall = FloatField()
+    one_line_evaluation = ListField(
+        StringField(max_length=150)
+    )
+
+    evaluation_count = LongField()
+
     # patients = ListField(
     #     ReferenceField(document_type='PatientModel')
     # )
@@ -87,9 +97,9 @@ class DaughterModel(AccountBase):
         required=True
     )
 
-    # parents = ListField(
-    #     ReferenceField(document_type='PatientModel')
-    # )
+    care_workers = ListField(
+        ReferenceField(document_type='CareWorkerModel')
+    )
 
 
 class CertifyCodesModel(Document):
