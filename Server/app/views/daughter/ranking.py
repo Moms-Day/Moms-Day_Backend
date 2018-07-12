@@ -9,7 +9,7 @@ from app.views import BaseResource, json_required, auth_required
 from app.models.account import CareWorkerModel, DaughterModel
 from app.models.facility import FacilityModel
 
-from app.docs.daughter.rangking import DAUGHTER_RANKING_FACILITY_GET
+from app.docs.daughter.ranking import DAUGHTER_RANKING_FACILITY_GET
 
 
 api = Api(Blueprint(__name__, __name__))

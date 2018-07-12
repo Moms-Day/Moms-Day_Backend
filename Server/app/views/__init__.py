@@ -132,6 +132,9 @@ class Router:
         app.register_blueprint(signup.api.blueprint)
         app.register_blueprint(auth.api.blueprint)
 
-        from app.views.daughter import signup, auth
+        from app.views.daughter import signup, auth, ranking, evaluate, info
         app.register_blueprint(signup.api.blueprint)
         app.register_blueprint(auth.api.blueprint)
+        app.register_blueprint(ranking.api.blueprint)
+        app.register_blueprint(evaluate.api.blueprint)
+        app.register_blueprint(info.api.blueprint)
