@@ -20,3 +20,17 @@ SAMPLE_REFRESH_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.' \
                        'zg1ZDAxNy1lYjIwLTRmYjgtYmVhYi1iYmYyZTQyY2NlYmYiLCJuYmYiOjE1MTM2NDU1NjMsInR5cGU' \
                        'iOiJhY2Nlc3MiLCJpYXQiOjE1MTM2NDU1NjN9.' \
                        '075C0_-b-oqSWc-jz7G35y00erRVntpcqN9uMIAnvfI'
+
+# [Example] facility_code(uuid)
+SAMPLE_FACILITY_CODE = [
+    'E8Hu43',
+    'de12QO',
+    '4pt0rE',
+    'vr3gp3',
+    'LLL0p2',
+    'dlpML6',
+    '6xd0l2',
+    'pld013',
+    'MmMO20',
+    'LFOpm3'
+]
