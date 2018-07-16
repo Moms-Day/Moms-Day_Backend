@@ -14,5 +14,8 @@ before_install:
 install:
   - pip3 install -r requirements.txt
 
+scrpt: 
+  - pytest
+
 notifications:
   email: false
