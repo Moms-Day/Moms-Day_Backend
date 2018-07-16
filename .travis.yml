@@ -8,13 +8,15 @@ python:
   - "3.6"
 
 before_install:
-- sudo docker run -d -p 27017:27017 mongo
-- cd Server
+  - sudo docker run -d -p 27017:27017 mongo
 
 install:
   - pip3 install -r requirements.txt
 
-scrpt: 
+before_script:
+  - cd Server
+
+script: 
   - pytest
 
 notifications:
