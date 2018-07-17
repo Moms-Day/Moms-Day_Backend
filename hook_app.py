@@ -14,5 +14,10 @@ def hook():
     return Response('hook!', 200)
 
 
+@app.route('/test')
+def test():
+    return Response('pl', 200)
+
+
 if __name__ == '__main__':
     app.run(port=9090, debug=True, host=socket.gethostbyname(socket.gethostname()))
