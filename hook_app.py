@@ -1,19 +1,18 @@
 import os
+import socket
 
-# from flask import Flask, Response
-
-
-# app = Flask(__name__)
+from flask import Flask, Response
 
 
-# @app.route('/hook', methods=['GET'])
-# def hook():
-#     os.system('./hook.sh')
-
-#     return Response('hook!', 200)
+app = Flask(__name__)
 
 
-# if __name__ == '__main__':
-#     app.run(port=9090)
+@app.route('/hook', methods=['POST'])
+def hook():
+    os.system('./hook.sh')
 
-os.system('./hook.sh')
+    return Response('hook!', 200)
+
+
+if __name__ == '__main__':
+    app.run(port=9090, debug=True, host=socket.gethostbyname(socket.gethostname()))
