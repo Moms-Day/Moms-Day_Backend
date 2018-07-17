@@ -41,4 +41,4 @@ class Index(BaseResource):
 @api.resource('/deploy')
 class AutoDeploy(BaseResource):
     def get(self):
-        return Response('yeah~~~~!!!', 200)
+        return Response('i will be young and rich', 200)
