@@ -42,3 +42,9 @@ class Index(BaseResource):
 class AutoDeploy(BaseResource):
     def get(self):
         return Response('last chance ><', 200)
+
+
+@api.resource('/success')
+class DeploySuccess(BaseResource):
+    def get(self):
+        return Response('i love flask', 200)
