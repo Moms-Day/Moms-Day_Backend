@@ -1,4 +1,4 @@
-from app.docs import SAMPLE_FACILITY_CODE
+from app.docs import SAMPLE_FACILITY_CODE, SAMPLE_OBJECT_IDS
 
 DAUGHTER_RANKING_FACILITY_GET = {
     'tags': ['[Daughter] 순위'],
@@ -17,7 +17,7 @@ DAUGHTER_RANKING_FACILITY_GET = {
             'description': '순위 조회 성공',
             'examples': {
                 'no token': {
-                        'facilityRanking': [
+                        'facility_ranking': [
                             {
                                 'facility_code': SAMPLE_FACILITY_CODE[0],
                                 'name': '무슨무슨 요양병원',
@@ -42,7 +42,7 @@ DAUGHTER_RANKING_FACILITY_GET = {
                         ]
                 },
                 'have token': {
-                        'facilityRanking': [
+                        'facility_ranking': [
                             {
                                 'facility_code': SAMPLE_FACILITY_CODE[0],
                                 'name': '무슨무슨 요양병원',
@@ -65,7 +65,7 @@ DAUGHTER_RANKING_FACILITY_GET = {
                                 'medals': ['가성비 갑', '보호사 친절도 짱']
                             }
                         ],
-                        'myFacilities': [
+                        'my_facilities': [
                             {
                                 'facility_code': SAMPLE_FACILITY_CODE[3],
                                 'name': '여기 엄마 모신곳 병원',
@@ -74,6 +74,102 @@ DAUGHTER_RANKING_FACILITY_GET = {
                                 'medals': []
                             }
                         ]
+                }
+            }
+        }
+    }
+}
+
+
+DAUGHTER_RANKING_CARE_WORKER_GET = {
+    'tags': ['[Daughter] 순위'],
+    'description': '요양 보호사 순위 조회',
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': 'JWT Token',
+            'in': 'header',
+            'type': 'str',
+            'required': False
+        }
+    ],
+    'responses': {
+        '200': {
+            'description': '순위 조회 성공',
+            'examples': {
+                'no token': {
+                        'care_worker_ranking': [
+                            {
+                                'care_worker_id': SAMPLE_OBJECT_IDS[0],
+                                'name': '이종현',
+                                'workplace': '강남 요양병원',
+                                'patient_in_charge': 4,
+                                'career': 8,
+                                'overall': 4.5
+                            },
+                            {
+                                'care_worker_id': SAMPLE_OBJECT_IDS[1],
+                                'name': '정다은',
+                                'workplace': '용산 노인의 집',
+                                'patient_in_charge': 6,
+                                'career': 5,
+                                'overall': 4.2
+                            },
+                            {
+                                'care_worker_id': SAMPLE_OBJECT_IDS[2],
+                                'name': '정경서',
+                                'workplace': '구로 요양원',
+                                'patient_in_charge': 1,
+                                'career': 2,
+                                'overall': 3.8
+                            }
+                        ]
+                },
+                'have token': {
+                    'care_worker_ranking': [
+                        {
+                            'care_worker_id': SAMPLE_OBJECT_IDS[0],
+                            'name': '이종현',
+                            'workplace': '강남 요양병원',
+                            'patient_in_charge': 4,
+                            'career': 8,
+                            'overall': 4.5
+                        },
+                        {
+                            'care_worker_id': SAMPLE_OBJECT_IDS[1],
+                            'name': '정다은',
+                            'workplace': '용산 노인의 집',
+                            'patient_in_charge': 6,
+                            'career': 5,
+                            'overall': 4.2
+                        },
+                        {
+                            'care_worker_id': SAMPLE_OBJECT_IDS[2],
+                            'name': '정경서',
+                            'workplace': '구로 요양원',
+                            'patient_in_charge': 1,
+                            'career': 2,
+                            'overall': 3.8
+                        }
+                    ],
+                    'my_care_workers': [
+                        {
+                            'care_worker_id': SAMPLE_OBJECT_IDS[2],
+                            'name': '정경서',
+                            'workplace': '구로 요양원',
+                            'patient_in_charge': 1,
+                            'career': 2,
+                            'overall': 3.8
+                        },
+                        {
+                            'care_worker_id': SAMPLE_OBJECT_IDS[3],
+                            'name': '장다혜',
+                            'workplace': '관악 중앙 요양원',
+                            'patient_in_charge': 5,
+                            'career': 10,
+                            'overall': 3.5
+                        }
+                    ]
                 }
             }
         }
