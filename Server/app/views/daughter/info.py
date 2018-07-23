@@ -5,8 +5,9 @@ from flasgger import swag_from
 from app.views import BaseResource
 
 from app.models.facility import FacilityModel
+from app.models.account import CareWorkerModel
 
-from app.docs.daughter.info import DAUGHTER_SHOW_FACILITY_INFO_GET
+from app.docs.daughter.info import *
 
 
 api = Api(Blueprint(__name__, __name__))
@@ -29,20 +30,41 @@ class ShowParticularFacility(BaseResource):
 
         return {
             'name': fac_info.name,
-            'phone_number': fac_info.phone_number,
+            'phoneNumber': fac_info.phone_number,
             'address': fac_info.address,
             'bio': fac_info.bio,
-            'score_facility': get_average_value(fac_info.evaluation_facility),
-            'score_meal': get_average_value(fac_info.evaluation_meal),
-            'score_schedule': get_average_value(fac_info.evaluation_schedule),
-            'score_cost': get_average_value(fac_info.evaluation_cost),
-            'score_service': get_average_value(fac_info.evaluation_service),
+            'scoreFacility': get_average_value(fac_info.evaluation_facility),
+            'scoreMeal': get_average_value(fac_info.evaluation_meal),
+            'scoreSchedule': get_average_value(fac_info.evaluation_schedule),
+            'scoreCost': get_average_value(fac_info.evaluation_cost),
+            'scoreService': get_average_value(fac_info.evaluation_service),
             'overall': get_average_value(fac_info.overall),
-            'one_line_e': one_line_e[:3]
+            'oneLineE': one_line_e[:3]
         }, 200
 
 
-@api.resource('/care_worker/<obj_id>')
+@api.resource('/care_worker/<care_worker_id>')
 class ShowParticularCareWorker(BaseResource):
-    def get(self):
-        pass
+    @swag_from(DAUGHTER_SHOW_CARE_WORKER_INFO_GET)
+    def get(self, care_worker_id):
+        care_worker = CareWorkerModel.objects(id=care_worker_id).first()
+
+        if not care_worker:
+            abort(400)
+
+        def get_average_value(val):
+            return round(val / care_worker.evaluation_count, 1)
+
+        one_line_e = [e for e in care_worker.one_line_evaluation]
+
+        return {
+            'name': care_worker.name,
+            'workplace': FacilityModel.objects(facility_code=care_worker.facility_code).first().name,
+            'patientInCharge': care_worker.patient_in_charge,
+            'career': care_worker.career,
+            'bio': care_worker.bio,
+            'scoreDiligence': get_average_value(care_worker.diligence),
+            'scoreKindness': get_average_value(care_worker.kindness),
+            'overall': get_average_value(care_worker.overall),
+            'oneLineE': one_line_e[:3]
+        }, 200

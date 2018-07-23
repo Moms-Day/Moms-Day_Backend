@@ -28,7 +28,7 @@ class RankingFacility(BaseResource):
         """
         def overlap_facility_data(facility_obj):
             return {
-                'facility_code': facility_obj.facility_code,
+                'facilityCode': facility_obj.facility_code,
                 'name': facility_obj.name,
                 'address': facility_obj.address,
                 'overall': round(facility_obj.overall / facility_obj.evaluation_count, 1),
@@ -37,13 +37,13 @@ class RankingFacility(BaseResource):
 
         # 전체 병원의 순위(overall 기준)
         info = {
-            'facility_ranking': [overlap_facility_data(facility)
-                                 for facility in FacilityModel.objects.order_by('-overall')]
+            'facilityRanking': [overlap_facility_data(facility)
+                                for facility in FacilityModel.objects.order_by('-overall')]
         }
 
         # 인증된 사용자라면 사용자 본인이 이용하고 있는 시설의 정보 추가
         if 'Authorization' in request.headers.keys():
-            info['my_facilities'] = \
+            info['myFacilities'] = \
                 [overlap_facility_data(facility) for facility in
                  [FacilityModel.objects(facility_code=my_fac.facility_code).first() for my_fac in
                   [c for c in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]]]
@@ -64,22 +64,22 @@ class RankingCareWorker(BaseResource):
         """
         def overlap_care_worker_data(worker_obj):
             return {
-                'care_worker_id': worker_obj.id,
+                'careWorkerId': worker_obj.id,
                 'name': worker_obj.name,
-                'workplace': FacilityModel.objects(facility_code=worker_obj.facility_code).first(),
-                'patient_in_charge': worker_obj.patient_in_charge,
+                'workplace': FacilityModel.objects(facility_code=worker_obj.facility_code).first().name,
+                'patientInCharge': worker_obj.patient_in_charge,
                 'career': worker_obj.career,
                 'overall': round(worker_obj.overall / worker_obj.evaluation_count, 1)
             }
 
         info = {
-            'care_worker_ranking': [overlap_care_worker_data(care_worker)
-                                    for care_worker in CareWorkerModel.objects.order_by('-overall')]
+            'careWorkerRanking': [overlap_care_worker_data(care_worker)
+                                  for care_worker in CareWorkerModel.objects.order_by('-overall')]
         }
 
         if 'Authorization' in request.headers.keys():
-            info['my_care_workers'] = [overlap_care_worker_data(care_worker)
-                                       for care_worker
-                                       in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]
+            info['myCareWorkers'] = [overlap_care_worker_data(care_worker)
+                                     for care_worker
+                                     in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]
 
         return info, 200
