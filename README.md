@@ -32,6 +32,5 @@
     - AWS Cloud Front
 ### Test
     - pytest
-    - Coveralls
-### What To Consider
-    - Auto Deploy(docker compose)
+### Auto Deploy
+    - github webhook
