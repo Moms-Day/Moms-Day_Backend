@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_restful import Api
-from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import get_jwt_identity, jwt_optional
 from flasgger import swag_from
 
 from app.views import BaseResource
@@ -17,6 +17,7 @@ api.prefix = '/daughter/ranking'
 
 @api.resource('/facility')
 class RankingFacility(BaseResource):
+    @jwt_optional
     @swag_from(DAUGHTER_RANKING_FACILITY_GET)
     def get(self):
         """
@@ -31,8 +32,9 @@ class RankingFacility(BaseResource):
                 'facilityCode': facility_obj.facility_code,
                 'name': facility_obj.name,
                 'address': facility_obj.address,
-                'overall': round(facility_obj.overall / facility_obj.evaluation_count, 1),
-                'medals': list(facility_obj.medals)
+                'overall': round(facility_obj.overall / facility_obj.evaluation_count, 1)
+                if facility_obj.evaluation_count != 0 else None,
+                'medals': list(facility_obj.medals) if facility_obj.medals is not None else []
             }
 
         # 전체 병원의 순위(overall 기준)
@@ -43,6 +45,7 @@ class RankingFacility(BaseResource):
 
         # 인증된 사용자라면 사용자 본인이 이용하고 있는 시설의 정보 추가
         if 'Authorization' in request.headers.keys():
+            print(request.headers['Authorization'])
             info['myFacilities'] = \
                 [overlap_facility_data(facility) for facility in
                  [FacilityModel.objects(facility_code=my_fac.facility_code).first() for my_fac in
@@ -53,6 +56,7 @@ class RankingFacility(BaseResource):
 
 @api.resource('/care_worker')
 class RankingCareWorker(BaseResource):
+    @jwt_optional
     @swag_from(DAUGHTER_RANKING_CARE_WORKER_GET)
     def get(self):
         """
@@ -83,3 +87,20 @@ class RankingCareWorker(BaseResource):
                                      in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]
 
         return info, 200
+
+
+@api.resource('/plus')
+class Plus(BaseResource):
+    def post(self):
+        FacilityModel(
+            facility_code=request.json['facilityCode'],
+            name=request.json['name'],
+            phone_number=request.json['phoneNumber'],
+            address=request.json['address'],
+            bio=request.json['bio'],
+            overall=request.json['overall'],
+            evaluation_count=request.json['evaluationCount'],
+            medals=request.json['medals']
+        ).save()
+
+        return '', 201
