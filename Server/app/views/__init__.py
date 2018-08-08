@@ -5,7 +5,7 @@ import time
 import ujson
 
 from flask import Response, abort, after_this_request, request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 
 
@@ -55,9 +55,10 @@ def auth_required(model):
         @wraps(fn)
         @jwt_required
         def wrapper(*args, **kwargs):
-            raise NotImplementedError()
+            if not model.objects(id=get_jwt_identity()).first():
+                abort(401)
 
-            # return fn(*args, **kwargs)
+            return fn(*args, **kwargs)
         return wrapper
     return decorator
 
