@@ -77,7 +77,7 @@ class CareWorkerModel(AccountBase):
         StringField(max_length=150)
     )
 
-    evaluation_count = LongField()
+    evaluation_count = LongField(default=0)
 
     # patients = ListField(
     #     ReferenceField(document_type='PatientModel')

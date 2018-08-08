@@ -34,7 +34,7 @@ class FacilityModel(Document):
         StringField(max_length=150)
     )
 
-    evaluation_count = LongField()
+    evaluation_count = LongField(default=0)
 
     # 칭호는 백그라운드에서 시간마다 칭호조건을 체크하면서 부여
     medals = ListField(
