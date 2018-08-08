@@ -3,8 +3,7 @@ from werkzeug.security import check_password_hash
 from app.models.account import CareWorkerModel
 
 
-def test_signup_success(flask_client, mongodb_set_for_test, info_test_care_worker):
-    mongodb_set_for_test.drop_database("Mom's_day")
+def test_signup_success(flask_client, info_test_care_worker):
     resp = flask_client.post(
         '/care/signup',
         json=info_test_care_worker
@@ -28,7 +27,7 @@ def test_signup_success(flask_client, mongodb_set_for_test, info_test_care_worke
     assert new_worker.bio == info_test_care_worker['bio']
 
 
-def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_care_worker):
+def test_id_duplicated(flask_client, info_test_care_worker):
     flask_client.post(
         '/care/signup',
         json=info_test_care_worker

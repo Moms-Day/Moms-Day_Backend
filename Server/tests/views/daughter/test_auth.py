@@ -1,4 +1,4 @@
-def test_auth_success(flask_client, mongodb_set_for_test, info_test_daughter):
+def test_auth_success(flask_client, info_test_daughter):
     flask_client.post(
         '/daughter/signup',
         json=info_test_daughter
@@ -28,7 +28,7 @@ def test_auth_success(flask_client, mongodb_set_for_test, info_test_daughter):
     assert type(refresh) is str
 
 
-def test_auth_nonexistence_id(flask_client, mongodb_set_for_test, info_test_daughter):
+def test_auth_nonexistence_id(flask_client, info_test_daughter):
     flask_client.post(
         'daughter/signup',
         json=info_test_daughter
@@ -46,7 +46,7 @@ def test_auth_nonexistence_id(flask_client, mongodb_set_for_test, info_test_daug
     assert resp.status_code == 401
 
 
-def test_auth_wrong_password(flask_client, mongodb_set_for_test, info_test_daughter):
+def test_auth_wrong_password(flask_client, info_test_daughter):
     flask_client.post(
         'daughter/signup',
         json=info_test_daughter

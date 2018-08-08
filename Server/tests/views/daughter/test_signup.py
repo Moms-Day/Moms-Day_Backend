@@ -4,8 +4,7 @@ from app.models.account import DaughterModel
 from app.models.patient import PatientModel
 
 
-def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
-    mongodb_set_for_test.drop_database("Mom's_day")
+def test_signup_success(flask_client, info_test_daughter):
     resp = flask_client.post(
         '/daughter/signup',
         json=info_test_daughter
@@ -41,7 +40,7 @@ def test_signup_success(flask_client, mongodb_set_for_test, info_test_daughter):
     assert new_p[1].gender == req_p[1]['gender']
 
 
-def test_id_duplicated(flask_client, mongodb_set_for_test, info_test_daughter):
+def test_id_duplicated(flask_client, info_test_daughter):
     flask_client.post(
         '/daughter/signup',
         json=info_test_daughter
