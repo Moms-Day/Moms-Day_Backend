@@ -74,6 +74,7 @@ class RankingCareWorker(BaseResource):
                 'patientInCharge': worker_obj.patient_in_charge,
                 'career': worker_obj.career,
                 'overall': round(worker_obj.overall / worker_obj.evaluation_count, 1)
+                if worker_obj.evaluation_count != 0 else None
             }
 
         info = {
