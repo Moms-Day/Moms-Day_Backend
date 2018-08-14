@@ -4,7 +4,7 @@ from flasgger import swag_from
 
 from app.views import BaseResource, json_required, auth_required
 
-from app.models.account import CareWorkerModel
+from app.models.account import CareWorkerModel, DaughterModel
 from app.models.facility import FacilityModel
 
 from app.docs.daughter.evaluate import *
@@ -14,10 +14,10 @@ api = Api(Blueprint(__name__, __name__))
 api.prefix = '/daughter/evaluate'
 
 
-@api.resource('/<facility_code>')
+@api.resource('/facility/<facility_code>')
 class EvaluateMyFacility(BaseResource):
     @swag_from(DAUGHTER_EVALUATE_FACILITY_PATCH)
-    @auth_required
+    @auth_required(DaughterModel)
     @json_required({
         'equipment': int,
         'meal': int,
@@ -51,10 +51,10 @@ class EvaluateMyFacility(BaseResource):
         return Response('', 201)
 
 
-@api.resource('/<care_worker_id>')
+@api.resource('/care_worker/<care_worker_id>')
 class EvaluateMyCareWorker(BaseResource):
     @swag_from(DAUGHTER_EVALUATE_CARE_WORKER_PATCH)
-    @auth_required
+    @auth_required(DaughterModel)
     @json_required({
         'diligence': int,
         'kindness': int,
