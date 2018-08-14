@@ -24,12 +24,12 @@ class FacilityModel(Document):
         required=True
     )
 
-    evaluation_equipment = LongField()
-    evaluation_meal = LongField()
-    evaluation_schedule = LongField()
-    evaluation_cost = LongField()
-    evaluation_service = LongField()
-    overall = FloatField()
+    evaluation_equipment = LongField(default=0)
+    evaluation_meal = LongField(default=0)
+    evaluation_schedule = LongField(default=0)
+    evaluation_cost = LongField(default=0)
+    evaluation_service = LongField(default=0)
+    overall = FloatField(default=0.0)
     one_line_evaluation = ListField(
         StringField(max_length=150)
     )

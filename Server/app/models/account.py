@@ -70,9 +70,9 @@ class CareWorkerModel(AccountBase):
     )
 
     # 평가 정보
-    evaluation_diligence = LongField()
-    evaluation_kindness = LongField()
-    overall = FloatField()
+    evaluation_diligence = LongField(default=0)
+    evaluation_kindness = LongField(default=0)
+    overall = FloatField(default=0.0)
     one_line_evaluation = ListField(
         StringField(max_length=150)
     )
