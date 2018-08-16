@@ -14,8 +14,4 @@ class ProductionConfig(Config):
         'debug': DEBUG
     })
 
-    MONGODB_SETTINGS = dict(Config.MONGODB_SETTINGS, **{
-        'host': HOST
-    })
-
     Config.SWAGGER['host'] = '{}:{}'.format(Config.DOMAIN or HOST, PORT)
