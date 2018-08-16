@@ -18,7 +18,7 @@ class Config:
     JWT_HEADER_TYPE = 'JWT'
 
     MONGODB_SETTINGS = {
-        'HOST': None,
+        'HOST': 'localhost',
         'port': None,
         'username': None,
         'password': os.getenv('MONGO_PW_{}'.format(SERVICE_NAME_UPPER)),
