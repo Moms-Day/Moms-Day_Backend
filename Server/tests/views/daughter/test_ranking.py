@@ -1,3 +1,5 @@
+import json
+
 from app.models.facility import FacilityModel
 from app.models.account import CareWorkerModel, DaughterModel
 
@@ -28,14 +30,14 @@ def test_facility_ranking_guest(flask_client):
                 'facilityCode': fac1.facility_code,
                 'name': fac1.name,
                 'address': fac1.address,
-                'overall': fac1.overall,
+                'overall': fac1.overall if fac1.evaluation_count != 0 else None,
                 'medals': fac1.medals
             },
             {
                 'facilityCode': fac2.facility_code,
                 'name': fac2.name,
                 'address': fac2.address,
-                'overall': fac2.overall,
+                'overall': fac2.overall if fac2.evaluation_count != 0 else None,
                 'medals': fac2.medals
             }
         ]
@@ -91,7 +93,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
                 'facilityCode': fac1.facility_code,
                 'name': fac1.name,
                 'address': fac1.address,
-                'overall': fac1.overall,
+                'overall': fac1.overall if fac1.evaluation_count != 0 else None,
                 'medals': fac1.medals
             }
         ],
@@ -100,14 +102,14 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
                 'facilityCode': fac1.facility_code,
                 'name': fac1.name,
                 'address': fac1.address,
-                'overall': fac1.overall,
+                'overall': fac1.overall if fac1.evaluation_count != 0 else None,
                 'medals': fac1.medals
             },
             {
                 'facilityCode': fac2.facility_code,
                 'name': fac2.name,
                 'address': fac2.address,
-                'overall': fac2.overall,
+                'overall': fac2.overall if fac2.evaluation_count != 0 else None,
                 'medals': fac2.medals
             }
         ]

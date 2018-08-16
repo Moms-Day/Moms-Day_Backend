@@ -96,7 +96,7 @@ def info_test_daughter(mongodb_set_for_test):
     mongodb_set_for_test[0].drop_database(mongodb_set_for_test[1])
 
 
-@pytest.fixture()
+@pytest.fixture(scope="function")
 def create_fake_daughter(info_test_daughter, mongodb_set_for_test):
     pn, cc = info_test_daughter.pop('phoneNumber'), info_test_daughter.pop('certifyCode')
     info_test_daughter['phone_number'], info_test_daughter['certify_code'] = pn, cc
@@ -107,6 +107,20 @@ def create_fake_daughter(info_test_daughter, mongodb_set_for_test):
         PatientModel(name=p['name'], age=p['age'], gender=['gender'], daughter=daughter).save()
 
     yield daughter
+
+    mongodb_set_for_test[0].drop_database(mongodb_set_for_test[1])
+
+
+@pytest.fixture(scope="function")
+def create_fake_care_worker(info_test_care_worker, mongodb_set_for_test):
+    care = info_test_care_worker
+    pi, pn, cc, fc = care.pop('patientInCharge'), care.pop('phoneNumber'), care.pop('certifyCode'), care.pop('facilityCode')
+    care['patient_in_charge'], care['phone_number'] = pi, pn
+    care['certify_code'], care['facility_code'] = cc, fc
+
+    care_worker = CareWorkerModel(**care).save()
+
+    yield care_worker
 
     mongodb_set_for_test[0].drop_database(mongodb_set_for_test[1])
 
