@@ -60,9 +60,9 @@ class CareWorkerModel(AccountBase):
         # required=True
     )
 
-    # profile_image = ImageField(
-    #
-    # )
+    image_path = StringField(
+
+    )
 
     bio = StringField(
         required=True,

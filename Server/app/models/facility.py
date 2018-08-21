@@ -24,6 +24,10 @@ class FacilityModel(Document):
         required=True
     )
 
+    image_path = StringField(
+
+    )
+
     evaluation_equipment = LongField(default=0)
     evaluation_meal = LongField(default=0)
     evaluation_schedule = LongField(default=0)

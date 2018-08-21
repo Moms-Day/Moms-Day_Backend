@@ -11,6 +11,9 @@ class Config:
         'threaded': True
     }
 
+    IMAGE_PATH = '../statics/imgs'
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
     SECRET_KEY = os.getenv('SECRET_KEY', '0la2kd03jfk1kk3fj3ivn3002m2me421')
 
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=12)
