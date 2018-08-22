@@ -29,6 +29,7 @@ class ShowParticularFacility(BaseResource):
         one_line_e = [e for e in fac_info.one_line_evaluation]
 
         return {
+            'image_path': fac_info.image_path,
             'name': fac_info.name,
             'phoneNumber': fac_info.phone_number,
             'address': fac_info.address,
@@ -58,6 +59,7 @@ class ShowParticularCareWorker(BaseResource):
         one_line_e = [e for e in care_worker.one_line_evaluation]
 
         return {
+            'image_path': care_worker.image_path,
             'name': care_worker.name,
             'workplace': FacilityModel.objects(facility_code=care_worker.facility_code).first().name,
             'patientInCharge': care_worker.patient_in_charge,
