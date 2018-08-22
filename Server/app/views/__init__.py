@@ -4,7 +4,8 @@ import time
 
 import ujson
 
-from flask import Response, abort, after_this_request, request
+from werkzeug.exceptions import HTTPException
+from flask import Response, abort, after_this_request, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 
@@ -17,6 +18,19 @@ def after_request(response):
     response.headers['X-Frame-Options'] = 'deny'
 
     return response
+
+
+def error_handler(e):
+    if isinstance(e, HTTPException):
+        des = e.description
+        code = e.code
+    else:
+        des = ''
+        code = 500
+
+    return jsonify({
+        'description': des
+    }), code
 
 
 def gzipped(fn):
@@ -124,7 +138,6 @@ class Router:
             self.init_app(app)
 
     def init_app(self, app):
-        app.after_request(after_request)
 
         from app.views import sample
         app.register_blueprint(sample.api.blueprint)

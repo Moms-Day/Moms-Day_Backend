@@ -5,7 +5,7 @@ from flasgger import Swagger
 
 from mongoengine import connect
 
-from app.views import Router
+from app.views import *
 
 
 def create_app(*config_cls):
@@ -28,5 +28,8 @@ def create_app(*config_cls):
     Router().init_app(app_)
 
     connect(**app_.config['MONGODB_SETTINGS'])
+
+    app_.after_request(after_request)
+    app_.register_error_handler(Exception, error_handler)
 
     return app_
