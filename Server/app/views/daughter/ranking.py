@@ -3,6 +3,8 @@ from flask_restful import Api
 from flask_jwt_extended import get_jwt_identity, jwt_optional
 from flasgger import swag_from
 
+from config.production import ProductionConfig
+
 from app.views import BaseResource
 
 from app.models.account import CareWorkerModel, DaughterModel
@@ -92,6 +94,9 @@ class RankingCareWorker(BaseResource):
 
 @api.resource('/plus')
 class Plus(BaseResource):
+    """
+    test api
+    """
     def post(self):
         FacilityModel(
             facility_code=request.json['facilityCode'],
@@ -105,3 +110,11 @@ class Plus(BaseResource):
         ).save()
 
         return '', 201
+
+
+@api.resource('/image/<name>')
+class ImageTest(BaseResource):
+    def get(self, name):
+        return {
+            'image_path': ProductionConfig.IMAGE_PATH_FOR_DOWNLOAD + '/facility_imgs/' + name + '.jpg'
+        }
