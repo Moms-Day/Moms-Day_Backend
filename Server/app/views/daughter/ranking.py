@@ -116,5 +116,5 @@ class Plus(BaseResource):
 class ImageTest(BaseResource):
     def get(self, name):
         return {
-            'image_path': ProductionConfig.IMAGE_PATH_FOR_DOWNLOAD + '/facility_imgs/' + name + '.jpg'
+            'image_path': '52.78.5.142/docs/facility_imgs/' + name + '.jpg'
         }
