@@ -7,6 +7,8 @@ from mongoengine import connect
 
 from app.views import *
 
+from config import Config
+
 
 def create_app(*config_cls):
     """
@@ -17,7 +19,10 @@ def create_app(*config_cls):
     """
     print('[INFO] Flask application initialized with {}'.format([config.__name__ for config in config_cls]))
 
-    app_ = Flask(__name__)
+    app_ = Flask(
+        __name__,
+        static_folder='{}/imgs'.format(Config.IMAGE_PATH)
+    )
 
     for config in config_cls:
         app_.config.from_object(config)
