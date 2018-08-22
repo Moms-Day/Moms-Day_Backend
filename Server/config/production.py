@@ -8,7 +8,7 @@ class ProductionConfig(Config):
     PORT = 80
     DEBUG = False
 
-    IMAGE_PATH_FOR_DOWNLOAD = HOST + '/statics/imgs'
+    IMAGE_PATH_FOR_DOWNLOAD = HOST + '/static/imgs'
 
     RUN_SETTING = dict(Config.RUN_SETTING, **{
         'host': HOST,

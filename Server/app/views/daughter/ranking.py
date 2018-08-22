@@ -114,7 +114,10 @@ class Plus(BaseResource):
 
 @api.resource('/image/<name>')
 class ImageTest(BaseResource):
+    """
+    test api
+    """
     def get(self, name):
         return {
-            'image_path': '52.78.5.142/docs/facility_imgs/' + name + '.jpg'
+            'image_path': '52.78.5.142/static/imgs/facility_imgs/' + name + '.jpg'
         }
