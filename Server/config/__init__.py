@@ -65,6 +65,10 @@ class Config:
             {
                 'name': '[Daughter] 순위',
                 'description': '자녀 앱에서 볼 수 있는 요양 보호사-시설 순위 API(랭킹, 상세정보, 평가)'
+            },
+            {
+                'name': '[Daughter] 연결',
+                'description': '요양보호사와의 연결 관련 API'
             }
             # ---------------------
         ]
