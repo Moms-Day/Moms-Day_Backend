@@ -23,7 +23,7 @@ class DaughterSignup(BaseResource):
         'phoneNumber': str,
         'name': str,
         'age': int,
-        'parents': list
+        # 'parents': list
     })
     def post(self):
         id = request.json['id']
@@ -40,10 +40,10 @@ class DaughterSignup(BaseResource):
             'age': request.json['age']
         }
 
-        d = DaughterModel(**new_user).save()
+        DaughterModel(**new_user).save()
 
-        for parent in request.json['parents']:
-            PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender'], daughter=d).save()
+        # for parent in request.json['parents']:
+        #     PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender'], daughter=d).save()
 
         # for parent in request.json['parents']:
         #     user.parents.append(
