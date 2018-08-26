@@ -7,6 +7,7 @@ from app.models.account import CareWorkerModel, DaughterModel
 def test_facility_ranking_guest(flask_client):
     fac1 = FacilityModel(
         facility_code='00003',
+        image_path='서버 어딘가 ㅎㅎ',
         name='인천 요양병원',
         phone_number='021120000',
         address='인천광역시 입구 봄동',
@@ -18,6 +19,7 @@ def test_facility_ranking_guest(flask_client):
 
     fac2 = FacilityModel(
         facility_code='00002',
+        image_path='서버 어딘가 ㅎㅎ',
         name='파주 요양병원',
         phone_number='03133332222',
         address='경기도 어딘가시 어딘가로',
@@ -28,6 +30,7 @@ def test_facility_ranking_guest(flask_client):
         'facilityRanking': [
             {
                 'facilityCode': fac1.facility_code,
+                'imagePath': fac1.image_path,
                 'name': fac1.name,
                 'address': fac1.address,
                 'overall': fac1.overall if fac1.evaluation_count != 0 else None,
@@ -35,6 +38,7 @@ def test_facility_ranking_guest(flask_client):
             },
             {
                 'facilityCode': fac2.facility_code,
+                'imagePath': fac2.image_path,
                 'name': fac2.name,
                 'address': fac2.address,
                 'overall': fac2.overall if fac2.evaluation_count != 0 else None,
@@ -57,6 +61,7 @@ def test_facility_ranking_guest(flask_client):
 def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake_token):
     fac1 = FacilityModel(
         facility_code='00003',
+        image_path='서버 어딘가 ㅎㅎ',
         name='인천 요양병원',
         phone_number='021120000',
         address='인천광역시 입구 봄동',
@@ -68,6 +73,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
 
     fac2 = FacilityModel(
         facility_code='00002',
+        image_path='서버 어딘가 ㅎㅎ',
         name='파주 요양병원',
         phone_number='03133332222',
         address='경기도 어딘가시 어딘가로',
@@ -81,6 +87,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
         phone_number='01099998888',
         career=2,
         patient_in_charge=3,
+        image_path='서버 어딘가 ㅎㅎ',
         facility_code='00003',
         bio='hi'
     ).save()
@@ -91,6 +98,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
         'myFacilities': [
             {
                 'facilityCode': fac1.facility_code,
+                'imagePath': fac1.image_path,
                 'name': fac1.name,
                 'address': fac1.address,
                 'overall': fac1.overall if fac1.evaluation_count != 0 else None,
@@ -100,6 +108,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
         'facilityRanking': [
             {
                 'facilityCode': fac1.facility_code,
+                'imagePath': fac1.image_path,
                 'name': fac1.name,
                 'address': fac1.address,
                 'overall': fac1.overall if fac1.evaluation_count != 0 else None,
@@ -107,6 +116,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
             },
             {
                 'facilityCode': fac2.facility_code,
+                'imagePath': fac2.image_path,
                 'name': fac2.name,
                 'address': fac2.address,
                 'overall': fac2.overall if fac2.evaluation_count != 0 else None,
@@ -130,6 +140,7 @@ def test_facility_ranking_member(flask_client, create_fake_daughter, create_fake
 def test_care_worker_ranking_guest(flask_client):
     FacilityModel(
         facility_code='00003',
+        image_path='서버 어딘가 ㅎㅎ',
         name='인천 요양병원',
         phone_number='021120000',
         address='인천광역시 입구 봄동',
@@ -141,6 +152,7 @@ def test_care_worker_ranking_guest(flask_client):
 
     FacilityModel(
         facility_code='00002',
+        image_path='서버 어딘가 ㅎㅎ',
         name='파주 요양병원',
         phone_number='03133332222',
         address='경기도 어딘가시 어딘가로',
@@ -154,6 +166,7 @@ def test_care_worker_ranking_guest(flask_client):
         phone_number='01099998888',
         career=2,
         patient_in_charge=3,
+        image_path='서버 어딘가 ㅎㅎ',
         facility_code='00003',
         bio='hi',
         overall=4,
@@ -167,6 +180,7 @@ def test_care_worker_ranking_guest(flask_client):
         phone_number='01079998288',
         career=10,
         patient_in_charge=5,
+        image_path='서버 어딘가 ㅎㅎ',
         facility_code='00002',
         bio='hello'
     ).save()
@@ -179,6 +193,7 @@ def test_care_worker_ranking_guest(flask_client):
         'careWorkerRanking': [
             {
                 'careWorkerId': care1.id,
+                'imagePath': care1.image_path,
                 'name': care1.name,
                 'workplace': FacilityModel.objects(facility_code=care1.facility_code).first().name,
                 'patientInCharge': care1.patient_in_charge,
@@ -187,6 +202,7 @@ def test_care_worker_ranking_guest(flask_client):
             },
             {
                 'careWorkerId': care2.id,
+                'imagePath': care1.image_path,
                 'name': care2.name,
                 'workplace': FacilityModel.objects(facility_code=care2.facility_code).first().name,
                 'patientInCharge': care2.patient_in_charge,
@@ -206,6 +222,7 @@ def test_care_worker_ranking_guest(flask_client):
 def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_fake_token):
     FacilityModel(
         facility_code='00003',
+        image_path='서버 어딘가 ㅎㅎ',
         name='인천 요양병원',
         phone_number='021120000',
         address='인천광역시 입구 봄동',
@@ -217,6 +234,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
 
     FacilityModel(
         facility_code='00002',
+        image_path='서버 어딘가 ㅎㅎ',
         name='파주 요양병원',
         phone_number='03133332222',
         address='경기도 어딘가시 어딘가로',
@@ -228,6 +246,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
         pw='qwe123',
         name='김이박',
         phone_number='01099998888',
+        image_path='서버 어딘가 ㅎㅎ',
         career=2,
         patient_in_charge=3,
         facility_code='00003',
@@ -243,6 +262,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
         pw='yyy111',
         name='최정',
         phone_number='01079998288',
+        image_path='서버 어딘가 ㅎㅎ',
         career=10,
         patient_in_charge=5,
         facility_code='00002',
@@ -253,6 +273,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
         'myCareWorkers': [
             {
                 'careWorkerId': care1.id,
+                'imagePath': care1.image_path,
                 'name': care1.name,
                 'workplace': FacilityModel.objects(facility_code=care1.facility_code).first().name,
                 'patientInCharge': care1.patient_in_charge,
@@ -263,6 +284,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
         'careWorkerRanking': [
             {
                 'careWorkerId': care1.id,
+                'imagePath': care1.image_path,
                 'name': care1.name,
                 'workplace': FacilityModel.objects(facility_code=care1.facility_code).first().name,
                 'patientInCharge': care1.patient_in_charge,
@@ -271,6 +293,7 @@ def test_care_worker_ranking_member(flask_client, create_fake_daughter, create_f
             },
             {
                 'careWorkerId': care2.id,
+                'imagePath': care2.image_path,
                 'name': care2.name,
                 'workplace': FacilityModel.objects(facility_code=care2.facility_code).first().name,
                 'patientInCharge': care2.patient_in_charge,
