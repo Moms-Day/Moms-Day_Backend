@@ -30,7 +30,7 @@ class RankingFacility(BaseResource):
         def overlap_facility_data(facility_obj):
             return {
                 'facilityCode': facility_obj.facility_code,
-                'simage_path': facility_obj.image_path,
+                'imagePath': facility_obj.image_path,
                 'name': facility_obj.name,
                 'address': facility_obj.address,
                 'overall': round(facility_obj.overall / facility_obj.evaluation_count, 1)
@@ -70,7 +70,7 @@ class RankingCareWorker(BaseResource):
         def overlap_care_worker_data(worker_obj):
             return {
                 'careWorkerId': worker_obj.id,
-                'image_path': worker_obj.image_path,
+                'imagePath': worker_obj.image_path,
                 'name': worker_obj.name,
                 'workplace': FacilityModel.objects(facility_code=worker_obj.facility_code).first().name,
                 'patientInCharge': worker_obj.patient_in_charge,

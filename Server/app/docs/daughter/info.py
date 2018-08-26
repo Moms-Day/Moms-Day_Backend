@@ -15,6 +15,7 @@ DAUGHTER_SHOW_FACILITY_INFO_GET = {
             'description': '상세정보 조회 성공',
             'examples': {
                 '': {
+                    'imagePath': '서버 어딘가에 있겠죵 ㅎㅎ',
                     'name': '종현 요양병원',
                     'phoneNumber': '02-1234-5678',
                     'address': '서울특별시 강남구 이종현로 224',
@@ -52,6 +53,7 @@ DAUGHTER_SHOW_CARE_WORKER_INFO_GET = {
             'description': '상세정보 조회 성공',
             'examples': {
                 '': {
+                    'imagePath': '서버 어딘가에 있겠죵 ㅎㅎ',
                     'name': '이종',
                     'workplace': '종현 요양병원',
                     'patientInCharge': 6,
