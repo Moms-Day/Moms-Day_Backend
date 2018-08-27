@@ -70,7 +70,7 @@ def auth_required(model):
         @jwt_required
         def wrapper(*args, **kwargs):
             if not model.objects(id=get_jwt_identity()).first():
-                abort(401)
+                abort(422)
 
             return fn(*args, **kwargs)
         return wrapper

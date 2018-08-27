@@ -23,7 +23,6 @@ class DaughterSignup(BaseResource):
         'phoneNumber': str,
         'name': str,
         'age': int,
-        # 'parents': list
     })
     def post(self):
         id = request.json['id']
@@ -31,23 +30,19 @@ class DaughterSignup(BaseResource):
         if DaughterModel.objects(id=id).first():
             abort(409)
 
+        req = request.json
+
         new_user = {
             'id': id,
-            'pw': generate_password_hash(request.json['pw']),
-            'phone_number': request.json['phoneNumber'],
-            'certify_code': request.json['certifyCode'],
-            'name': request.json['name'],
-            'age': request.json['age']
+            'pw': generate_password_hash(req['pw']),
+            'phone_number': req['phoneNumber'],
+            'certify_code': req['certifyCode'],
+            'name': req['name'],
+            'age': req['age']
         }
 
-        DaughterModel(**new_user).save()
+        d = DaughterModel(**new_user).save()
 
-        # for parent in request.json['parents']:
-        #     PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender'], daughter=d).save()
-
-        # for parent in request.json['parents']:
-        #     user.parents.append(
-        #         PatientModel(name=parent['name'], age=parent['age'], gender=parent['gender']).save()
-        #     )
+        PatientModel(name=req['p_name'], age=req['p_age'], gender=req['p_gender'], daughter=d).save()
 
         return Response('', 201)
