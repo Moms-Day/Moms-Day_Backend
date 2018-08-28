@@ -23,7 +23,7 @@ class PatientModel(Document):
         document_type='DaughterModel'
     )
 
-    care_workers = ReferenceField(
+    care_worker = ReferenceField(
         document_type='CareWorkerModel'
     )
 

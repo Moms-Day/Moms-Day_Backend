@@ -17,4 +17,4 @@ class RequestModel(Document):
         required=True
     )
 
-    request_time = DateTimeField(default=datetime.now())
+    request_time = DateTimeField(default=datetime.now)
