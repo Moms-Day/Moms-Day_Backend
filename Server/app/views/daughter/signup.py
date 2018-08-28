@@ -43,6 +43,7 @@ class DaughterSignup(BaseResource):
 
         d = DaughterModel(**new_user).save()
 
-        PatientModel(name=req['p_name'], age=req['p_age'], gender=req['p_gender'], daughter=d).save()
+        if req['p_name']:
+            PatientModel(name=req['p_name'], age=req['p_age'], gender=req['p_gender'], daughter=d).save()
 
         return Response('', 201)
