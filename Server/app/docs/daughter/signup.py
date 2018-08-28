@@ -43,27 +43,6 @@ DAUGHTER_SIGNUP_POST = {
             'in': 'json',
             'type': 'int',
             'required': True
-        },
-        {
-            'name': 'p_name',
-            'description': '노부모 이름',
-            'in': 'json',
-            'type': 'str',
-            'required': False
-        },
-        {
-            'name': 'p_age',
-            'description': '노부모 나이',
-            'in': 'json',
-            'type': 'int',
-            'required': False
-        },
-        {
-            'name': 'p_gender',
-            'description': '노부모 성별',
-            'in': 'json',
-            'type': 'bool',
-            'required': False
         }
     ],
     'responses': {
