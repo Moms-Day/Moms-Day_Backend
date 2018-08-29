@@ -91,22 +91,22 @@ class RankingCareWorker(BaseResource):
 
         return info, 200
 
-
-@api.resource('/plus')
-class Plus(BaseResource):
-    """
-    test api
-    """
-    def post(self):
-        FacilityModel(
-            facility_code=request.json['facilityCode'],
-            name=request.json['name'],
-            phone_number=request.json['phoneNumber'],
-            address=request.json['address'],
-            bio=request.json['bio'],
-            overall=request.json['overall'],
-            evaluation_count=request.json['evaluationCount'],
-            medals=request.json['medals']
-        ).save()
-
-        return '', 201
+#
+# @api.resource('/plus')
+# class Plus(BaseResource):
+#     """
+#     test api
+#     """
+#     def post(self):
+#         FacilityModel(
+#             facility_code=request.json['facilityCode'],
+#             name=request.json['name'],
+#             phone_number=request.json['phoneNumber'],
+#             address=request.json['address'],
+#             bio=request.json['bio'],
+#             overall=request.json['overall'],
+#             evaluation_count=request.json['evaluationCount'],
+#             medals=request.json['medals']
+#         ).save()
+#
+#         return '', 201

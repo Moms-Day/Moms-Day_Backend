@@ -27,6 +27,10 @@ class CareSignup(BaseResource):
     })
     def post(self):
         id = request.json['id']
+
+        if CareWorkerModel.objects(id=id).first():
+            abort(409)
+
         new_user = {
             'id': id,
             'pw': generate_password_hash(request.json['pw']),
@@ -38,9 +42,6 @@ class CareSignup(BaseResource):
             'facility_code': request.json['facilityCode'],
             'bio': request.json['bio']
         }
-
-        if CareWorkerModel.objects(id=id).first():
-            abort(409)
 
         CareWorkerModel(**new_user).save()
 
