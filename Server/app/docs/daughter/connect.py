@@ -108,14 +108,14 @@ DAUGHTER_REQUEST_CONNECTION_POST = {
             'name': 'patientAge',
             'description': '보호사에게 맡길 노부모의 나이',
             'in': 'json',
-            'type': 'str',
+            'type': 'int',
             'required': True
         },
         {
             'name': 'patientGender',
             'description': '보호사에게 맡길 노부모의 성별',
             'in': 'json',
-            'type': 'str',
+            'type': 'bool',
             'required': True
         }
     ],

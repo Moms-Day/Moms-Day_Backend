@@ -97,10 +97,6 @@ class DaughterModel(AccountBase):
         required=True
     )
 
-    # care_workers = ListField(
-    #     ReferenceField(document_type='CareWorkerModel')
-    # )
-
 
 class CertifyCodesModel(Document):
     certify_code = StringField(required=True)
