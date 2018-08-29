@@ -55,6 +55,10 @@ class Config:
                 'name': '[CareWorker] 계정',
                 'description': '요양보호사 계정 관련 API'
             },
+            {
+                'name': '[CareWorker] 연결',
+                'description': '자녀와의 연결 관련 API'
+            },
             # ---------------------
 
             # Daughter ----------
