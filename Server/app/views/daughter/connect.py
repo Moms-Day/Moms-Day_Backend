@@ -68,32 +68,32 @@ class RequestConnection(BaseResource):
         return Response('', 201)
 
 
-# @api.resource('/plus')
-# class InsertDummyData(BaseResource):
-#     def post(self):
-#         FacilityModel(
-#             facility_code=request.json['facilityCode'],
-#             name=request.json['name'],
-#             phone_number=request.json['phoneNumber'],
-#             address=request.json['address'],
-#             bio=request.json['bio']
-#         ).save()
-#
-#         return '', 201
-#
-#
-# @api.resource('/plus2')
-# class InsertDummyDataCare(BaseResource):
-#     def post(self):
-#         CareWorkerModel(
-#             id=request.json["id"],
-#             pw=request.json["pw"],
-#             phone_number=request.json['phoneNumber'],
-#             name=request.json["name"],
-#             facility_code=request.json["facilityCode"],
-#             career=request.json["career"],
-#             patient_in_charge=request.json["patientInCharge"],
-#             bio=request.json["bio"]
-#         ).save()
-#
-#         return '', 201
+@api.resource('/plus')
+class InsertDummyData(BaseResource):
+    def post(self):
+        FacilityModel(
+            facility_code=request.json['facilityCode'],
+            name=request.json['name'],
+            phone_number=request.json['phoneNumber'],
+            address=request.json['address'],
+            bio=request.json['bio']
+        ).save()
+
+        return '', 201
+
+
+@api.resource('/plus2')
+class InsertDummyDataCare(BaseResource):
+    def post(self):
+        CareWorkerModel(
+            id=request.json["id"],
+            pw=request.json["pw"],
+            phone_number=request.json['phoneNumber'],
+            name=request.json["name"],
+            facility_code=request.json["facilityCode"],
+            career=request.json["career"],
+            patient_in_charge=request.json["patientInCharge"],
+            bio=request.json["bio"]
+        ).save()
+
+        return '', 201
