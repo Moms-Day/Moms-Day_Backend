@@ -4,6 +4,8 @@ from mongoengine import *
 
 
 class RequestModel(Document):
+    req_id = StringField(required=True, primary_key=True)
+
     # 요청한 대상(보호사)
     care_worker = ReferenceField(required=True, document_type='CareWorkerModel')
 

@@ -1,4 +1,5 @@
 import re
+import uuid
 
 from flask import Blueprint, request, Response
 from flask_restful import Api
@@ -35,7 +36,7 @@ class SearchFacility(BaseResource):
             } for care in CareWorkerModel.objects(facility_code=fac.facility_code)]
         } for fac in facs] if facs else []
 
-        return self.unicode_safe_json_dumps(data)
+        return self.unicode_safe_json_dumps(data, 200)
 
 
 @api.resource('/request')
@@ -51,8 +52,11 @@ class RequestConnection(BaseResource):
         'patientGender': bool
     })
     def post(self):
+        req_id = str(uuid.uuid4())
         payload = request.json
+
         RequestModel(
+            req_id=req_id,
             care_worker=CareWorkerModel.objects(id=payload['careId']).first(),
             requester_id=payload['requesterId'],
             requester_name=payload['requesterName'],

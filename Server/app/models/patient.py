@@ -2,6 +2,11 @@ from mongoengine import *
 
 
 class PatientModel(Document):
+    id = StringField(
+        required=True,
+        primary_key=True
+    )
+
     name = StringField(
         max_length=20, required=True
     )
