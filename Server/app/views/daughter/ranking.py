@@ -60,7 +60,7 @@ class RankingFacility(BaseResource):
             #      [FacilityModel.objects(facility_code=my_fac.facility_code).first() for my_fac in
             #       [c for c in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]]]
 
-        return self.unicode_safe_json_dumps(info), 200
+        return self.unicode_safe_json_dumps(info, 200)
 
 
 @api.resource('/care_worker')
@@ -103,7 +103,7 @@ class RankingCareWorker(BaseResource):
             #                          for care_worker
             #                          in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]
 
-        return self.unicode_safe_json_dumps(info), 200
+        return self.unicode_safe_json_dumps(info, 200)
 
 
 # @api.resource('/plus')
