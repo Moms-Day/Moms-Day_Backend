@@ -7,6 +7,7 @@ from app.views import BaseResource
 
 from app.models.account import CareWorkerModel, DaughterModel
 from app.models.facility import FacilityModel
+from app.models.patient import PatientModel
 
 from app.docs.daughter.ranking import DAUGHTER_RANKING_FACILITY_GET, DAUGHTER_RANKING_CARE_WORKER_GET
 
@@ -47,10 +48,17 @@ class RankingFacility(BaseResource):
         # 인증된 사용자라면 사용자 본인이 이용하고 있는 시설의 정보 추가
         if 'Authorization' in request.headers.keys():
             print(request.headers['Authorization'])
-            info['myFacilities'] = \
-                [overlap_facility_data(facility) for facility in
-                 [FacilityModel.objects(facility_code=my_fac.facility_code).first() for my_fac in
-                  [c for c in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]]]
+
+            patients = PatientModel.objects(DaughterModel.objects(id=get_jwt_identity()).first())
+            cares = [patient.care_worker for patient in patients]
+            facs = [FacilityModel.objects(facility_code=care.facility_code)for care in cares]
+
+            info['myFacilities'] = [overlap_facility_data(fac) for fac in facs]
+
+            # info['myFacilities'] = \
+            #     [overlap_facility_data(facility) for facility in
+            #      [FacilityModel.objects(facility_code=my_fac.facility_code).first() for my_fac in
+            #       [c for c in DaughterModel.objects(id=get_jwt_identity()).first().care_workers]]]
 
         return info, 200
 
