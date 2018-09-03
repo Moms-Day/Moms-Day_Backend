@@ -36,7 +36,7 @@ class RankingFacility(BaseResource):
                 'overall': round(facility_obj.overall / facility_obj.evaluation_count, 1)
                 if facility_obj.evaluation_count != 0 else None,
                 'medals': list(facility_obj.medals) if facility_obj.medals is not None else []
-            }
+            } if facility_obj else {}
 
         # 전체 병원의 순위(overall 기준)
         info = {
@@ -77,7 +77,7 @@ class RankingCareWorker(BaseResource):
                 'career': worker_obj.career,
                 'overall': round(worker_obj.overall / worker_obj.evaluation_count, 1)
                 if worker_obj.evaluation_count != 0 else None
-            }
+            } if worker_obj else {}
 
         info = {
             'careWorkerRanking': [overlap_care_worker_data(care_worker)
