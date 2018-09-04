@@ -95,7 +95,7 @@ class RankingCareWorker(BaseResource):
         if 'Authorization' in request.headers.keys():
             print(request.headers['Authorization'])
 
-            patients = PatientModel.objects(DaughterModel.objects(id=get_jwt_identity()).first())
+            patients = PatientModel.objects(daughter=DaughterModel.objects(id=get_jwt_identity()).first())
             cares = [patient.care_worker for patient in patients]
 
             info['myCareWorkers'] = [overlap_care_worker_data(care) for care in cares]
