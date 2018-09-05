@@ -1,3 +1,5 @@
+import datetime
+
 from mongoengine import *
 
 
@@ -39,22 +41,26 @@ class MealMenu(Document):
     """
 
     date = DateTimeField(
-        required=True
+        required=True,
+        default=datetime.datetime.utcnow().date()
     )
 
-    breakfast = ListField(StringField(
-        required=True
-    ))
+    breakfast = StringField(
+        required=True,
+        default=""
+    )
 
-    lunch = ListField(StringField(
-        required=True
-    ))
+    lunch = StringField(
+        required=True,
+        default=""
+    )
 
-    dinner = ListField(StringField(
-        required=True
-    ))
+    dinner = StringField(
+        required=True,
+        default=""
+    )
 
-    snack = StringField(max_length=30)
+    snack = StringField(max_length=30, default="")
 
     patient = ReferenceField(
         document_type='PatientModel',
@@ -67,20 +73,36 @@ class Schedule(Document):
     하루 일정표
     """
     date = DateTimeField(
-        required=True
-    )
-
-    time_column = ListField(
-        DateTimeField(required=True)
-    )
-
-    work = ListField(
-        StringField(max_length=100, required=True)
+        required=True,
+        default=datetime.datetime.utcnow().date()
     )
 
     patient = ReferenceField(
         document_type='PatientModel',
         reverse_delete_rule=CASCADE
+    )
+
+
+class ScheduleTimeTables(Document):
+    schedule = ReferenceField(
+        document_type="Schedule",
+        reverse_delete_rule=CASCADE
+    )
+
+    start = StringField(
+        required=True,
+        default=""
+    )
+
+    end = StringField(
+        required=True,
+        default=""
+    )
+
+    work = StringField(
+        required=True,
+        max_length=100,
+        default=""
     )
 
 
@@ -92,24 +114,23 @@ class PhysicalCondition(Document):
         required=True
     )
 
-    activity_reduction = BooleanField(default=False)
-    low_temperature = BooleanField(default=False)
-    high_fever = BooleanField(default=False)
-    blood_pressure_increase = BooleanField(default=False)
-    blood_pressure_reduction = BooleanField(default=False)
-    lack_of_sleep = BooleanField(default=False)
-    lose_Appetite = BooleanField(default=False)
-    binge_eating = BooleanField(default=False)
-    diarrhea = BooleanField(default=False)
-    constipation = BooleanField(default=False)
-    vomiting = BooleanField(default=False)
-    urination_inconvenient = BooleanField(default=False)
-    human_power_reduction = BooleanField(default=False)
-    poverty_of_blood = BooleanField(default=False)
-    cough = BooleanField(default=False)
-    bool_of_cough = BooleanField(default=False)
+    activity_reduction = BooleanField(default=False) # 활동량 감소
+    low_temperature = BooleanField(default=False) # 저체온
+    high_fever = BooleanField(default=False) # 고열
+    blood_pressure_increase = BooleanField(default=False) # 고혈압
+    blood_pressure_reduction = BooleanField(default=False) # 저혈압
+    lack_of_sleep = BooleanField(default=False) # 수면부족
+    lose_Appetite = BooleanField(default=False) # 식욕 감퇴
+    binge_eating = BooleanField(default=False) # 폭식
+    diarrhea = BooleanField(default=False) # 설사
+    constipation = BooleanField(default=False) # 변비
+    vomiting = BooleanField(default=False) # 구토
+    urination_inconvenient = BooleanField(default=False) # 배뇨활동 불편
+    human_power_reduction = BooleanField(default=False) # 인지력 감퇴
+    poverty_of_blood = BooleanField(default=False) # 빈혈
+    cough = BooleanField(default=False) # 기침
 
-    comment = StringField(max_length=300)
+    comment = StringField(required=True, max_length=300, default="특이사항 없음")
 
     patient = ReferenceField(
         document_type='PatientModel',
@@ -122,12 +143,15 @@ class RepresentativePhoto(Document):
     하루를 대표하는 사진
     """
     date = DateTimeField(
+        required=True,
+        default=datetime.datetime.utcnow().date()
+    )
+
+    image_path = StringField(
 
     )
 
-    # photo = ImageField()
-
-    comment = StringField(max_length=200)
+    comment = StringField(max_length=200, default="")
 
     patient = ReferenceField(
         document_type='PatientModel',

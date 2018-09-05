@@ -59,6 +59,10 @@ class Config:
                 'name': '[CareWorker] 연결',
                 'description': '자녀와의 연결 관련 API'
             },
+            {
+                'name': '[CareWorker] 폼 작성',
+                'description': '노인의 하루를 담은 폼을 작성하는 API'
+            },
             # ---------------------
 
             # Daughter ----------

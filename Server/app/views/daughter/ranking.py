@@ -112,15 +112,14 @@ class RankingCareWorker(BaseResource):
 #     test api
 #     """
 #     def post(self):
-#         FacilityModel(
-#             facility_code=request.json['facilityCode'],
-#             name=request.json['name'],
-#             phone_number=request.json['phoneNumber'],
-#             address=request.json['address'],
-#             bio=request.json['bio'],
-#             overall=request.json['overall'],
-#             evaluation_count=request.json['evaluationCount'],
-#             medals=request.json['medals']
+#         CareWorkerModel(
+#             id="qwer",
+#             pw="pw12",
+#             name="qerr",
+#             phone_number="101010",
+#             career=2,
+#             patient_in_charge=5,
+#             facility_code="000012"
 #         ).save()
 #
 #         return '', 201
