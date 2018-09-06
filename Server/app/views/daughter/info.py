@@ -34,7 +34,7 @@ class ShowParticularFacility(BaseResource):
             'phoneNumber': fac_info.phone_number,
             'address': fac_info.address,
             'bio': fac_info.bio,
-            'scoreFacility': get_average_value(fac_info.evaluation_facility),
+            'scoreFacility': get_average_value(fac_info.evaluation_equipment),
             'scoreMeal': get_average_value(fac_info.evaluation_meal),
             'scoreSchedule': get_average_value(fac_info.evaluation_schedule),
             'scoreCost': get_average_value(fac_info.evaluation_cost),
