@@ -145,6 +145,7 @@ class UpdateFormOfCondition(BaseResource):
         condition_form = PhysicalCondition.objects(patient=patient, date=current_date)
 
         if not condition_form:
+            abort(428)
 
         condition_form.update(**payload)
 
