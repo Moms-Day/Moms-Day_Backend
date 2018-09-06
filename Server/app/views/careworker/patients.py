@@ -23,7 +23,7 @@ class ViewPatientsList(BaseResource):
     @auth_required(CareWorkerModel)
     def get(self):
         c = CareWorkerModel.objects(id=get_jwt_identity()).first()
-        reqs = RequestModel.objects(care=c)
+        reqs = RequestModel.objects(care_worker=c)
         patients = PatientModel.objects(care_worker=c)
         data = {
             'connectionRequests': [{
