@@ -76,7 +76,8 @@ class InsertDummyData(BaseResource):
             name=request.json['name'],
             phone_number=request.json['phoneNumber'],
             address=request.json['address'],
-            bio=request.json['bio']
+            bio=request.json['bio'],
+            image_path=request.json['imagePath']
         ).save()
 
         return '', 201
