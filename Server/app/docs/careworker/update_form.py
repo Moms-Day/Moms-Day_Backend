@@ -1,6 +1,6 @@
-CARE_SEND_MEAL_FORM_POST = {
+CARE_UPDATE_MEAL_FORM_PATCH = {
     'tags': ['[CareWorker] 폼 작성'],
-    'description': '식사 관련 폼을 작성',
+    'description': '식사 관련 폼을 수정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -47,17 +47,20 @@ CARE_SEND_MEAL_FORM_POST = {
     ],
     'responses': {
         '201': {
-            'description': '폼 작성 성공',
+            'description': '폼 수정 성공',
         },
         '400': {
             'description': '존재하지 않는 노인 id'
+        },
+        '428': {
+            'description': '작성되어있지 않은 폼(수정불가)'
         }
     }
 }
 
-CARE_SEND_SCHEDULE_FORM_POST = {
+CARE_UPDATE_SCHEDULE_FORM_PATCH = {
     'tags': ['[CareWorker] 폼 작성'],
-    'description': '일정 관련 폼을 작성',
+    'description': '일정 관련 폼을 수정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -104,17 +107,20 @@ CARE_SEND_SCHEDULE_FORM_POST = {
     ],
     'responses': {
         '201': {
-            'description': '폼 작성 성공',
+            'description': '폼 수정 성공',
         },
         '400': {
             'description': '존재하지 않는 노인 id'
+        },
+        '428': {
+            'description': '작성되어있지 않은 폼(수정불가)'
         }
     }
 }
 
-CARE_SEND_PHOTO_FORM_POST = {
+CARE_UPDATE_PHOTO_FORM_PATCH = {
     'tags': ['[CareWorker] 폼 작성'],
-    'description': '하루를 대표하는 사진에 관한 폼 작성',
+    'description': '하루를 대표하는 사진에 관한 폼 수정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -151,13 +157,16 @@ CARE_SEND_PHOTO_FORM_POST = {
         },
         '400': {
             'description': '존재하지 않는 노인 id'
+        },
+        '428': {
+            'description': '작성되어있지 않은 폼(수정불가)'
         }
     }
 }
 
-CARE_SEND_CONDITION_FORM_POST = {
+CARE_UPDATE_CONDITION_FORM_PATCH = {
     'tags': ['[CareWorker] 폼 작성'],
-    'description': '오늘 노인의 건강상태',
+    'description': '오늘 노인의 건강상태 수정',
     'parameters': [
         {
             'name': 'Authorization',
@@ -174,7 +183,7 @@ CARE_SEND_CONDITION_FORM_POST = {
             'required': True
         },
         {
-            'name': '종류가 많아서 description 에 첨부함',
+            'name': '증상(종류가 많아서 description 에 첨부함)',
             'description': ' activity_reduction(활동량 감소), '
                            'low_temperature(저체온), high_fever(고열), blood_pressure_increase(고혈압), '
                            'blood_pressure_reduction(저혈압), lack_of_sleep(수면부족), lose_Appetite(식욕 감퇴), '
@@ -192,6 +201,10 @@ CARE_SEND_CONDITION_FORM_POST = {
         },
         '400': {
             'description': '존재하지 않는 노인 id'
+        },
+        '428': {
+            'description': '작성되어있지 않은 폼(수정불가)'
         }
     }
 }
+

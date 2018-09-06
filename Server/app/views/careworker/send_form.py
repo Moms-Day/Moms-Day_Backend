@@ -102,3 +102,27 @@ class SendFormOfPhoto(BaseResource):
         RepresentativePhoto(**data).save()
 
         return Response('', 201)
+
+
+@api.resource('/condition')
+class SendFormOfCondition(BaseResource):
+    @swag_from(CARE_SEND_CONDITION_FORM_POST)
+    @auth_required({CareWorkerModel})
+    @json_required({
+        'pId': str
+    })
+    def post(self):
+        current_date = datetime.datetime.utcnow().date()
+        payload = dict(request.json)
+        p_id = payload.pop('pId')
+        patient = PatientModel.objects(id=p_id).first()
+
+        if not patient:
+            abort(400)
+
+        payload.update({'patient': patient, 'date': current_date})
+
+        PhysicalCondition(**payload).save()
+
+        return Response('', 201)
+
