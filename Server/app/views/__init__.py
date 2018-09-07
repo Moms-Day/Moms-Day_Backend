@@ -145,12 +145,13 @@ class Router:
         from app.views import hook
         app.register_blueprint(hook.api.blueprint)
 
-        from app.views.careworker import signup, auth, patients, send_form, update_form
+        from app.views.careworker import signup, auth, patients, send_form, update_form, mypage
         app.register_blueprint(signup.api.blueprint)
         app.register_blueprint(auth.api.blueprint)
         app.register_blueprint(patients.api.blueprint)
         app.register_blueprint(send_form.api.blueprint)
         app.register_blueprint(update_form.api.blueprint)
+        app.register_blueprint(mypage.api.blueprint)
 
         from app.views.daughter import signup, auth, ranking, evaluate, info, connect
         app.register_blueprint(signup.api.blueprint)

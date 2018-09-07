@@ -61,7 +61,7 @@ class CareWorkerModel(AccountBase):
     )
 
     image_path = StringField(
-
+        default=""
     )
 
     bio = StringField(
