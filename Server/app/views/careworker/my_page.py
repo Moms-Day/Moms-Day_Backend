@@ -13,10 +13,10 @@ from app.views import BaseResource, json_required, auth_required
 from app.models.account import CareWorkerModel
 from app.models.patient import *
 
-from app.docs.careworker.mypage import *
+from app.docs.careworker.my_page import *
 
 api = Api(Blueprint(__name__, __name__))
-api.prefix = '/care/mypage'
+api.prefix = '/care/my_page'
 
 
 @api.resource('')

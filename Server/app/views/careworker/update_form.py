@@ -2,7 +2,7 @@ import datetime
 import base64
 import os
 
-from flask import Blueprint, request, Response, abort
+from flask import Blueprint, request, Response, abort, current_app
 from flask_restful import Api
 from flasgger import swag_from
 
@@ -117,7 +117,7 @@ class UpdateFormOfPhoto(BaseResource):
         convert_and_save(payload['encodedImage'], image_path)
 
         data = {
-            'image_path': image_path,
+            'image_path': current_app.config['HOST'] + ":" + current_app.config['PORT'] + image_path[8:],
             'comment': payload['comment'],
         }
 
