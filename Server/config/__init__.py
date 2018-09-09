@@ -65,7 +65,7 @@ class Config:
             },
             # ---------------------
 
-            # Daughter ----------
+            # Daughter ------------
             {
                 'name': '[Daughter] 계정',
                 'description': '자녀 계정 관련 API'
@@ -77,6 +77,10 @@ class Config:
             {
                 'name': '[Daughter] 연결',
                 'description': '요양보호사와의 연결 관련 API'
+            },
+            {
+                'name': '[Daughter] 폼',
+                'description': '오늘 노인의 하루정보에 관한 API'
             }
             # ---------------------
         ]
