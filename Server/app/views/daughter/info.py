@@ -58,15 +58,17 @@ class ShowParticularCareWorker(BaseResource):
 
         one_line_e = [e for e in care_worker.one_line_evaluation]
 
+        fac = FacilityModel.objects(facility_code=care_worker.facility_code).first()
+
         return {
             'imagePath': care_worker.image_path,
             'name': care_worker.name,
-            'workplace': FacilityModel.objects(facility_code=care_worker.facility_code).first().name,
+            'workplace': fac.name if fac else None,
             'patientInCharge': care_worker.patient_in_charge,
             'career': care_worker.career,
             'bio': care_worker.bio,
-            'scoreDiligence': get_average_value(care_worker.diligence),
-            'scoreKindness': get_average_value(care_worker.kindness),
+            'scoreDiligence': get_average_value(care_worker.evaluation_diligence),
+            'scoreKindness': get_average_value(care_worker.evaluation_kindness),
             'overall': get_average_value(care_worker.overall),
             'oneLineE': one_line_e[:3]
         }, 200
