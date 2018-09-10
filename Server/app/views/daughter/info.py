@@ -54,7 +54,7 @@ class ShowParticularCareWorker(BaseResource):
             abort(400)
 
         def get_average_value(val):
-            return round(val / care_worker.evaluation_count, 1) if care_worker.evaluation_cost != 0 else 0
+            return round(val / care_worker.evaluation_count, 1) if care_worker.evaluation_count != 0 else 0
 
         one_line_e = [e for e in care_worker.one_line_evaluation]
 
