@@ -98,7 +98,7 @@ class ChangePassword(BaseResource):
         care = CareWorkerModel.objects(id=get_jwt_identity()).first()
 
         if not check_password_hash(care.pw, request.json['currentPw']):
-            abort(401)
+            abort(403)
 
         care.update(pw=request.json['newPw'])
 

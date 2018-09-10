@@ -154,7 +154,7 @@ CARE_CHANGE_PASSWORD_PATCH = {
         '201': {
             'description': '비밀번호 변경 성공'
         },
-        '401': {
+        '403': {
             'description': '현재 비밀번호가 틀림'
         }
     }
