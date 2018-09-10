@@ -76,16 +76,21 @@ class RankingCareWorker(BaseResource):
             - 이름, 소속(요양시설), 담당 노인 수, 경력, 총점
         """
         def overlap_care_worker_data(worker_obj):
-            return {
-                'careWorkerId': worker_obj.id,
-                'imagePath': worker_obj.image_path,
-                'name': worker_obj.name,
-                'workplace': FacilityModel.objects(facility_code=worker_obj.facility_code).first().name,
-                'patientInCharge': worker_obj.patient_in_charge,
-                'career': worker_obj.career,
-                'overall': round(worker_obj.overall / worker_obj.evaluation_count, 1)
-                if worker_obj.evaluation_count != 0 else None
-            } if worker_obj else {}
+            data = {}
+
+            if worker_obj:
+                data = {
+                    'careWorkerId': worker_obj.id,
+                    'imagePath': worker_obj.image_path,
+                    'name': worker_obj.name,
+                    'workplace': FacilityModel.objects(facility_code=worker_obj.facility_code).first().name,
+                    'patientInCharge': worker_obj.patient_in_charge,
+                    'career': worker_obj.career,
+                    'overall': round(worker_obj.overall / worker_obj.evaluation_count, 1)
+                    if worker_obj.evaluation_count != 0 else None
+                }
+
+            return data
 
         info = {
             'careWorkerRanking': [overlap_care_worker_data(care_worker)

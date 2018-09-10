@@ -153,7 +153,7 @@ class Router:
         app.register_blueprint(update_form.api.blueprint)
         app.register_blueprint(my_page.api.blueprint)
 
-        from app.views.daughter import signup, auth, ranking, evaluate, info, connect, forms
+        from app.views.daughter import signup, auth, ranking, evaluate, info, connect, forms, my_page
         app.register_blueprint(signup.api.blueprint)
         app.register_blueprint(auth.api.blueprint)
         app.register_blueprint(ranking.api.blueprint)
@@ -161,3 +161,4 @@ class Router:
         app.register_blueprint(info.api.blueprint)
         app.register_blueprint(connect.api.blueprint)
         app.register_blueprint(forms.api.blueprint)
+        app.register_blueprint(my_page.api.blueprint)
