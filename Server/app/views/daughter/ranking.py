@@ -51,7 +51,7 @@ class RankingFacility(BaseResource):
 
             patients = PatientModel.objects(daughter=DaughterModel.objects(id=get_jwt_identity()).first())
             cares = [patient.care_worker for patient in patients]
-            facs = [FacilityModel.objects(facility_code=care.facility_code)for care in cares]
+            facs = [FacilityModel.objects(facility_code=care.facility_code).first() for care in cares]
 
             info['myFacilities'] = [overlap_facility_data(fac) for fac in facs]
 
