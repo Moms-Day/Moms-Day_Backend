@@ -8,11 +8,18 @@ DAUGHTER_VIEW_FORM_GET = {
             'in': 'header',
             'type': 'str',
             'required': True
+        },
+        {
+            'name': 'p_id',
+            'description': '폼을 조회할 노인의 id',
+            'in': 'path',
+            'type': 'str',
+            'required': True
         }
     ],
     'responses': {
         '200': {
-            'description': '순위 조회 성공',
+            'description': '폼 조회 성공',
             'examples': {
                 '': {
                     'today': {
