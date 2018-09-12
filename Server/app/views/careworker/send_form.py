@@ -20,13 +20,13 @@ api.prefix = '/care/send/form'
 class SendFormOfMeal(BaseResource):
     @swag_from(CARE_SEND_MEAL_FORM_POST)
     @auth_required(CareWorkerModel)
-    # @json_required({
-    #     'breakfast': str,
-    #     'lunch': str,
-    #     'dinner': str,
-    #     'snack': str,
-    #     'pId': str
-    # })
+    @json_required({
+        'breakfast': str,
+        'lunch': str,
+        'dinner': str,
+        'snack': str,
+        'pId': str
+    })
     def post(self):
         payload = request.json
         patient = PatientModel.objects(id=payload['pId']).first()
