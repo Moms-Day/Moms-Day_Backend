@@ -54,7 +54,7 @@ class ViewForm(BaseResource):
                     'photo_path': photo.image_path,
                     'comment': photo.comment
                 } if photo else {}
-            }, 200
+            }
 
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
         patient = PatientModel.objects(id=p_id).first()
@@ -70,4 +70,4 @@ class ViewForm(BaseResource):
             'today': todays_report(patient, current_date),
             'yesterday': todays_report(patient, current_date - datetime.timedelta(days=1)),
             '2days_ago': todays_report(patient, current_date - datetime.timedelta(days=2))
-        }
+        }, 200
