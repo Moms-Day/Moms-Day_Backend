@@ -34,7 +34,7 @@ class ViewForm(BaseResource):
             meal = MealMenu.objects(patient=p, date=date).first()
             schedule = Schedule.objects(patient=p, date=date).first()
             photo = RepresentativePhoto.objects(patient=p, date=date).first()
-            condition = PhysicalCondition.objects(patient=p, datetime=date).first()
+            condition = PhysicalCondition.objects(patient=p, date=date).first()
 
             return {
                 'date': str(date),
