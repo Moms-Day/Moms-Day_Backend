@@ -19,7 +19,7 @@ api = Api(Blueprint(__name__, __name__))
 @api.resource('/daughter/main')
 class GetPatients(BaseResource):
     @swag_from(DAUGHTER_GET_PATIENTS_ID_GET)
-    @auth_required
+    @auth_required(DaughterModel)
     def get(self):
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
         return [patient.id for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
