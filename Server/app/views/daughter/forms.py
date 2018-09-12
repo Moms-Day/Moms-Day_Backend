@@ -16,6 +16,14 @@ from app.docs.daughter.forms import DAUGHTER_VIEW_FORM_GET
 api = Api(Blueprint(__name__, __name__))
 
 
+@api.resource('/daughter/main')
+class GetPatients(BaseResource):
+    @auth_required
+    def get(self):
+        daughter = DaughterModel.objects(id=get_jwt_identity()).first()
+        return [patient.id for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
+
+
 @api.resource('/daughter/form/<p_id>')
 class ViewForm(BaseResource):
     @swag_from(DAUGHTER_VIEW_FORM_GET)
