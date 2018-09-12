@@ -28,7 +28,7 @@ class GetPatients(BaseResource):
 @api.resource('/daughter/form/<p_id>')
 class ViewForm(BaseResource):
     @swag_from(DAUGHTER_VIEW_FORM_GET)
-    @auth_required(CareWorkerModel)
+    @auth_required(DaughterModel)
     def get(self, p_id):
         def todays_report(p, date):
             meal = MealMenu.objects(patient=p, date=date).first()
