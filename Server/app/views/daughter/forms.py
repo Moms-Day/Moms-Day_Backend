@@ -42,19 +42,19 @@ class ViewForm(BaseResource):
                     'breakfast': str(meal.breakfast).split(' '),
                     'lunch': str(meal.lunch).split(' '),
                     'dinner': str(meal.dinner).split(' ')
-                },
+                } if meal else {},
                 'schedule': [{
                     'time': table.start + ' ~ ' + table.end,
                     'work': table.work
-                } for table in ScheduleTimeTables.objects(schedule=schedule)],
+                } for table in ScheduleTimeTables.objects(schedule=schedule)] if schedule else [],
                 'condition': [{
                     k: v
                 } for k, v in dict(condition.to_mongo()).items() if type(v) == bool and v is True] if condition else [],
                 'photo': {
                     'photo_path': photo.image_path,
                     'comment': photo.comment
-                }
-            }
+                } if photo else {}
+            }, 200
 
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
         patient = PatientModel.objects(id=p_id).first()
