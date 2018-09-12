@@ -11,13 +11,14 @@ from app.models.account import CareWorkerModel, DaughterModel
 from app.models.patient import PatientModel
 from app.models.patient import *
 
-from app.docs.daughter.forms import DAUGHTER_VIEW_FORM_GET
+from app.docs.daughter.forms import DAUGHTER_VIEW_FORM_GET, DAUGHTER_GET_PATIENTS_ID_GET
 
 api = Api(Blueprint(__name__, __name__))
 
 
 @api.resource('/daughter/main')
 class GetPatients(BaseResource):
+    @swag_from(DAUGHTER_GET_PATIENTS_ID_GET)
     @auth_required
     def get(self):
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()

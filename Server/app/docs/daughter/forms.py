@@ -1,3 +1,28 @@
+DAUGHTER_GET_PATIENTS_ID_GET = {
+    'tags': ['[Daughter] 폼'],
+    'description': '요양보호사와 연결된 자신의 노인 id 받아오기',
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': 'JWT Token',
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
+    ],
+    'responses': {
+        '200': {
+            'description': '폼 조회 성공',
+            'examples': {
+                '': {
+                    ['id1', 'id2', 'id3']
+                }
+            }
+        }
+    }
+}
+
+
 DAUGHTER_VIEW_FORM_GET = {
     'tags': ['[Daughter] 폼'],
     'description': '',
