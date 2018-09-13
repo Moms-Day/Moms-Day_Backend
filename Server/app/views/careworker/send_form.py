@@ -94,7 +94,7 @@ class SendFormOfPhoto(BaseResource):
 
         data = {
             'date': current_date,
-            'image_path': str(current_app.config['HOST']) + ":" + str(current_app.config['PORT']) + image_path[8:],
+            'image_path': str(current_app.config['PUBLIC_HOST']) + ":" + str(current_app.config['PORT']) + image_path[8:],
             'comment': payload['comment'],
             'patient': patient
         }

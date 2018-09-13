@@ -6,6 +6,7 @@ class Config:
     SERVICE_NAME = "Mom's_day"
     SERVICE_NAME_UPPER = SERVICE_NAME.upper()
     DOMAIN = None
+    PUBLIC_HOST = "52.78.5.142"
 
     RUN_SETTING = {
         'threaded': True

@@ -117,7 +117,7 @@ class UpdateFormOfPhoto(BaseResource):
         convert_and_save(payload['encodedImage'], image_path)
 
         data = {
-            'image_path': current_app.config['HOST'] + ":" + current_app.config['PORT'] + image_path[8:],
+            'image_path': current_app.config['PUBLIC_HOST'] + ":" + current_app.config['PORT'] + image_path[8:],
             'comment': payload['comment'],
         }
 
