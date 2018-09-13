@@ -39,9 +39,9 @@ class ViewForm(BaseResource):
             return {
                 'date': str(date),
                 'meal': {
-                    'breakfast': str(meal.breakfast).split(' '),
-                    'lunch': str(meal.lunch).split(' '),
-                    'dinner': str(meal.dinner).split(' ')
+                    'breakfast': str(meal.breakfast).split('\n'),
+                    'lunch': str(meal.lunch).split('\n'),
+                    'dinner': str(meal.dinner).split('\n')
                 } if meal else {},
                 'schedule': [{
                     'time': table.start + ' ~ ' + table.end,
@@ -66,8 +66,8 @@ class ViewForm(BaseResource):
         if patient.daughter.id != daughter.id:
             abort(403)
 
-        return {
+        return self.unicode_safe_json_dumps({
             'today': todays_report(patient, current_date),
             'yesterday': todays_report(patient, current_date - datetime.timedelta(days=1)),
             '2days_ago': todays_report(patient, current_date - datetime.timedelta(days=2))
-        }, 200
+        }, 200)
