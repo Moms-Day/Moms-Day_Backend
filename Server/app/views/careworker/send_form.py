@@ -108,7 +108,7 @@ class SendFormOfPhoto(BaseResource):
 @api.resource('/condition')
 class SendFormOfCondition(BaseResource):
     @swag_from(CARE_SEND_CONDITION_FORM_POST)
-    @auth_required({CareWorkerModel})
+    @auth_required(CareWorkerModel)
     @json_required({
         'pId': str
     })
