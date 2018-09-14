@@ -122,7 +122,7 @@ class SendFormOfCondition(BaseResource):
             abort(400)
 
         payload.update({'patient': patient, 'date': current_date})
-
+        print(payload)
         PhysicalCondition(**payload).save()
 
         return Response('', 201)
