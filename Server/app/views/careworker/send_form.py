@@ -4,6 +4,7 @@ import base64
 from flask import Blueprint, request, Response, abort, current_app
 from flask_restful import Api
 from flasgger import swag_from
+from flask_jwt_extended import get_jwt_identity
 
 from app.views import BaseResource, json_required, auth_required
 
@@ -126,3 +127,103 @@ class SendFormOfCondition(BaseResource):
 
         return Response('', 201)
 
+
+@api.resource('/additional')
+class SendFormOfAdditional(BaseResource):
+    @swag_from(CARE_SEND_ADDITIONAL_FORM_POST)
+    @auth_required(CareWorkerModel)
+    @json_required({
+        'pId': str,
+        'description': str
+    })
+    def post(self):
+        payload = request.json
+        patient = PatientModel.objects(id=payload['pId']).first()
+
+        if not patient:
+            abort(400)
+
+        AdditionalDescription(
+            date=datetime.datetime.utcnow().date(),
+            description=payload['description'],
+            patient=patient
+        ).save()
+
+        return Response('', 201)
+
+
+@api.resource('/meal/<p_id>')
+class ViewPostedMealForm(BaseResource):
+    @auth_required(CareWorkerModel)
+    def get(self, p_id):
+        current_date = datetime.datetime.utcnow().date()
+        care = CareWorkerModel.objects(id=get_jwt_identity()).first()
+        patient = PatientModel.objects(id=p_id, care_worker=care).first()
+
+        if not patient:
+            abort(400)
+
+        meal = MealMenu.objects(patient=patient, date=current_date).first()
+
+        return self.unicode_safe_json_dumps({
+            'breakfast': str(meal.breakfast).split('\n'),
+            'lunch': str(meal.lunch).split('\n'),
+            'dinner': str(meal.dinner).split('\n'),
+            'snack': meal.snack
+        }, 200) if meal else {}
+
+
+@api.resource('/schedule/<p_id>')
+class ViewPostedScheduleForm(BaseResource):
+    @auth_required(CareWorkerModel)
+    def get(self, p_id):
+        current_date = datetime.datetime.utcnow().date()
+        care = CareWorkerModel.objects(id=get_jwt_identity()).first()
+        patient = PatientModel.objects(id=p_id, care_worker=care).first()
+
+        if not patient:
+            abort(400)
+
+        schedule = Schedule.objects(patient=patient, date=current_date).first()
+
+        return self.unicode_safe_json_dumps([{
+            'time': table.start + ' ~ ' + table.end,
+            'work': table.work
+        } for table in ScheduleTimeTables.objects(schedule=schedule)], 200) if schedule else []
+
+
+@api.resource('/photo/<p_id>')
+class ViewPostedPhotoForm(BaseResource):
+    @auth_required(CareWorkerModel)
+    def get(self, p_id):
+        current_date = datetime.datetime.utcnow().date()
+        care = CareWorkerModel.objects(id=get_jwt_identity()).first()
+        patient = PatientModel.objects(id=p_id, care_worker=care).first()
+
+        if not patient:
+            abort(400)
+
+        photo = RepresentativePhoto.objects(patient=patient, date=current_date).first()
+
+        return {
+            'photo_path': photo.image_path,
+            'comment': photo.comment
+        } if photo else {}
+
+
+@api.resource('/condition/<p_id>')
+class ViewPostedConditionForm(BaseResource):
+    @auth_required(CareWorkerModel)
+    def get(self, p_id):
+        current_date = datetime.datetime.utcnow().date()
+        care = CareWorkerModel.objects(id=get_jwt_identity()).first()
+        patient = PatientModel.objects(id=p_id, care_worker=care).first()
+
+        if not patient:
+            abort(400)
+
+        condition = PhysicalCondition.objects(patient=patient, date=current_date).first()
+
+        return [{
+            k: v
+        } for k, v in dict(condition.to_mongo()).items() if type(v) == bool and v is True] if condition else []

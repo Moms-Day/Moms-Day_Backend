@@ -150,3 +150,29 @@ class UpdateFormOfCondition(BaseResource):
         condition_form.update(**payload)
 
         return Response('', 201)
+
+
+@api.resource('/additional')
+class UpdateFormAdditional(BaseResource):
+    @swag_from(CARE_UPDATE_ADDITIONAL_FORM_PATCH)
+    @auth_required(CareWorkerModel)
+    @json_required({
+        'pId': str,
+        'description': str
+    })
+    def patch(self):
+        payload = request.json
+        current_date = datetime.datetime.utcnow().date()
+        patient = PatientModel.objects(id=payload['pId']).first()
+
+        if not patient:
+            abort(400)
+
+        additional = AdditionalDescription.objects(patient=patient, date=current_date).first()
+
+        if not additional:
+            abort(428)
+
+        additional.update(description=payload['description'])
+
+        return Response('', 201)

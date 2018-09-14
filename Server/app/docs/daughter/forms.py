@@ -74,6 +74,9 @@ DAUGHTER_VIEW_FORM_GET = {
                         'photo': {
                             'photo_path': '서버 어딘가',
                             'comment': '오늘 밥먹음'
+                        },
+                        'additional': {
+                            'description': '추가사항임'
                         }
                     },
                     'yesterday': {
@@ -105,6 +108,9 @@ DAUGHTER_VIEW_FORM_GET = {
                         'photo': {
                             'photo_path': '서버 어딘가',
                             'comment': '오늘 밥먹음'
+                        },
+                        'additional': {
+                            'description': '추가사항임'
                         }
                     },
                     '2days_ago': {
@@ -136,6 +142,9 @@ DAUGHTER_VIEW_FORM_GET = {
                         'photo': {
                             'photo_path': '서버 어딘가',
                             'comment': '오늘 밥먹음'
+                        },
+                        'additional': {
+                            'description': '추가사항임'
                         }
                     }
                 }

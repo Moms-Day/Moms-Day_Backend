@@ -208,3 +208,42 @@ CARE_UPDATE_CONDITION_FORM_PATCH = {
     }
 }
 
+
+CARE_UPDATE_ADDITIONAL_FORM_PATCH = {
+    'tags': ['[CareWorker] 폼 작성'],
+    'description': '추가사항 수정',
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': 'JWT Token',
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
+        {
+            'name': 'pId',
+            'description': '폼을 작성할 노인의 id',
+            'in': 'json',
+            'type': 'str',
+            'required': True
+        },
+        {
+            'name': 'description',
+            'description': '추가 사항',
+            'in': 'json',
+            'type': 'str',
+            'required': True
+        }
+    ],
+    'responses': {
+        '201': {
+            'description': '폼 수정 성공',
+        },
+        '400': {
+            'description': '존재하지 않는 노인 id'
+        },
+        '428': {
+            'description': '작성되어있지 않은 폼(수정불가)'
+        }
+    }
+}

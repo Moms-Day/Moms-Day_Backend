@@ -157,3 +157,22 @@ class RepresentativePhoto(Document):
         document_type='PatientModel',
         reverse_delete_rule=CASCADE
     )
+
+
+class AdditionalDescription(Document):
+    """
+    폼 정보를 제외한 부가설명
+    """
+    date = DateTimeField(
+        required=True
+    )
+
+    description = StringField(
+        required=True,
+        max_length=200
+    )
+
+    patient = ReferenceField(
+        document_type='PatientModel',
+        reverse_delete_rule=CASCADE
+    )

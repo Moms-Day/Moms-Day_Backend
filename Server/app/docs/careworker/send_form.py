@@ -195,3 +195,39 @@ CARE_SEND_CONDITION_FORM_POST = {
         }
     }
 }
+
+CARE_SEND_ADDITIONAL_FORM_POST = {
+    'tags': ['[CareWorker] 폼 작성'],
+    'description': '폼 이외의 부가사항',
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': 'JWT Token',
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
+        {
+            'name': 'pId',
+            'description': '폼을 작성할 노인의 id',
+            'in': 'json',
+            'type': 'str',
+            'required': True
+        },
+        {
+            'name': 'description',
+            'description': '추가 사항',
+            'in': 'json',
+            'type': 'str',
+            'required': True
+        }
+    ],
+    'responses': {
+        '201': {
+            'description': '폼 작성 성공',
+        },
+        '400': {
+            'description': '존재하지 않는 노인 id'
+        }
+    }
+}

@@ -35,13 +35,15 @@ class ViewForm(BaseResource):
             schedule = Schedule.objects(patient=p, date=date).first()
             photo = RepresentativePhoto.objects(patient=p, date=date).first()
             condition = PhysicalCondition.objects(patient=p, date=date).first()
+            additional = AdditionalDescription.objects(patient=p, date=date).first()
 
             return {
                 'date': str(date),
                 'meal': {
                     'breakfast': str(meal.breakfast).split('\n'),
                     'lunch': str(meal.lunch).split('\n'),
-                    'dinner': str(meal.dinner).split('\n')
+                    'dinner': str(meal.dinner).split('\n'),
+                    'snack': meal.snack
                 } if meal else {},
                 'schedule': [{
                     'time': table.start + ' ~ ' + table.end,
@@ -53,7 +55,10 @@ class ViewForm(BaseResource):
                 'photo': {
                     'photo_path': photo.image_path,
                     'comment': photo.comment
-                } if photo else {}
+                } if photo else {},
+                'additional': {
+                    'description': additional.description
+                } if additional else {}
             }
 
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
