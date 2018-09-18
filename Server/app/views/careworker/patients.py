@@ -37,6 +37,7 @@ class ViewPatientsList(BaseResource):
                 } for req in reqs] if reqs else [],
 
             'inChargeList': [{
+                'd_id': patient.daughter.id,
                 'id': patient.id,
                 'name': patient.name,
                 'age': patient.age,
