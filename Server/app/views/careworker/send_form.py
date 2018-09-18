@@ -224,6 +224,5 @@ class ViewPostedConditionForm(BaseResource):
 
         condition = PhysicalCondition.objects(patient=patient, date=current_date).first()
 
-        return [{
-            k: v
-        } for k, v in dict(condition.to_mongo()).items() if type(v) == bool and v is True] if condition else []
+        return {k: v for k, v in
+                dict(condition.to_mongo()).items() if type(v) == bool and v is True} if condition else {}

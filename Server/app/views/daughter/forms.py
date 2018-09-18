@@ -49,9 +49,8 @@ class ViewForm(BaseResource):
                     'time': table.start + ' ~ ' + table.end,
                     'work': table.work
                 } for table in ScheduleTimeTables.objects(schedule=schedule)] if schedule else [],
-                'condition': [{
-                    k: v
-                } for k, v in dict(condition.to_mongo()).items() if type(v) == bool and v is True] if condition else [],
+                'condition': {k: v for k, v in
+                              dict(condition.to_mongo()).items() if type(v) == bool and v is True} if condition else {},
                 'photo': {
                     'photo_path': photo.image_path,
                     'comment': photo.comment
