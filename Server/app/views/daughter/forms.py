@@ -22,7 +22,10 @@ class GetPatients(BaseResource):
     @auth_required(DaughterModel)
     def get(self):
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
-        return [patient.id for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
+        return [{
+            'id': patient.id,
+            'name': patient.name
+        } for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
 
 
 @api.resource('/daughter/form/<p_id>')
