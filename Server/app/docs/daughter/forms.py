@@ -14,7 +14,16 @@ DAUGHTER_GET_PATIENTS_ID_GET = {
         '200': {
             'description': '폼 조회 성공',
             'examples': {
-                '': ['id1', 'id2', 'id3']
+                '': [
+                    {
+                        'id': 'idid1',
+                        'name': '이종현'
+                    },
+                    {
+                        'id': 'idid2',
+                        'name': '정다은'
+                    }
+                ]
             }
         }
     }
