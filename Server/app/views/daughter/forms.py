@@ -7,6 +7,7 @@ from flasgger import swag_from
 
 from app.views import BaseResource, auth_required
 
+from app.models.facility import FacilityModel
 from app.models.account import CareWorkerModel, DaughterModel
 from app.models.patient import PatientModel
 from app.models.patient import *
@@ -27,7 +28,8 @@ class GetPatients(BaseResource):
             'name': patient.name,
             'careId': patient.care_worker.id,
             'careName': patient.care_worker.name,
-            'facilityCode': patient.care_worker.facility_code
+            'facilityCode': patient.care_worker.facility_code,
+            'facilityName': FacilityModel.objects(facility_code=patient.care_worker.facility_code).first().name
         } for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
 
 

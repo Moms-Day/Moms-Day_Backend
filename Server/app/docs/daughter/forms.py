@@ -20,14 +20,16 @@ DAUGHTER_GET_PATIENTS_ID_GET = {
                         'name': '이종현',
                         'careId': 'care1',
                         'careName': '김 보호사',
-                        'facilityCode': '000012'
+                        'facilityCode': '000012',
+                        'facilityName': '구석탱이시설'
                     },
                     {
                         'id': 'idid2',
                         'name': '정다은',
                         'careId': 'care2',
                         'careName': '소 보호사',
-                        'facilityCode': '000022'
+                        'facilityCode': '000022',
+                        'facilityName': '서울 한복판 시설'
                     }
                 ]
             }
