@@ -17,11 +17,17 @@ DAUGHTER_GET_PATIENTS_ID_GET = {
                 '': [
                     {
                         'id': 'idid1',
-                        'name': '이종현'
+                        'name': '이종현',
+                        'careId': 'care1',
+                        'careName': '김 보호사',
+                        'facilityCode': '000012'
                     },
                     {
                         'id': 'idid2',
-                        'name': '정다은'
+                        'name': '정다은',
+                        'careId': 'care2',
+                        'careName': '소 보호사',
+                        'facilityCode': '000022'
                     }
                 ]
             }

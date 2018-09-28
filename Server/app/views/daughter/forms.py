@@ -24,7 +24,10 @@ class GetPatients(BaseResource):
         daughter = DaughterModel.objects(id=get_jwt_identity()).first()
         return [{
             'id': patient.id,
-            'name': patient.name
+            'name': patient.name,
+            'careId': patient.care_worker.id,
+            'careName': patient.care_worker.name,
+            'facilityCode': patient.care_worker.facility_code
         } for patient in PatientModel.objects(daughter=daughter) if patient.care_worker], 200
 
 

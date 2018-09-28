@@ -71,7 +71,7 @@ class ModifyAccountInfo(BaseResource):
             'name': care.name,
             'career': care.career,
             'patients': patients_list,
-            'facility_code': care.facility_code,
+            'facilityCode': care.facility_code,
             'bio': care.bio
         }, 200)
 
