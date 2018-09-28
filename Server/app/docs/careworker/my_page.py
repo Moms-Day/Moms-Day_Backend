@@ -103,7 +103,7 @@ CARE_MODIFY_ACCOUNT_INFO_PATCH = {
             'required': False
         },
         {
-            'name': 'facilityCode',
+            'name': 'facility_code',
             'description': '수정할 병원 코드',
             'in': 'json',
             'type': 'str',
