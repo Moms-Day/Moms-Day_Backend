@@ -1,5 +1,5 @@
 # Mom's Day _ Backend
-[![Build Status](https://travis-ci.org/Moms-Day/Moms-Day_Backend.svg?branch=master)](https://travis-ci.org/Moms-Day/Moms-Day_Backend)
+
 ## About this service
 - Mom's day 는 요양보호사와 자녀의 소통을 돕기 위한 어플리케이션입니다.
 - Mom's day 는 단순한 요양보호사와 자녀의 소통을 도와주는 것뿐만 아니라 자녀에게 신뢰도 높은 노인보호시설, 요양보호사의 정보를 알려줍니다. 또한, 요양보호사의 노인 학대, 노인 방치 등을 방지할 수 있는 서비스입니다.
@@ -20,17 +20,7 @@
     - REST API
 ### API Documentation
     - Swagger
-### Continuous Integration Tool
-    - Travis CI
 ### Cloud Computing
     - AWS EC2
-### Cloud Storage
-    - AWS S3
-### DNS server
-    - AWS Route53
-### CDN server
-    - AWS Cloud Front
-### Test
-    - pytest
 ### Auto Deploy
     - github webhook
